@@ -23,5 +23,7 @@ public class Exercicio1 {
 
         // Exibindo os dados informados ao usuário;
         System.out.printf("\nOlá! Seu nome é %s, você tem %d anos, é da cidade de %s, situada no estado de %s.\n", nome, idade, cidade, estado);
+
+        entrada.close();
     }
 }

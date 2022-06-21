@@ -61,5 +61,6 @@ public class Exercicio6 {
         } else {
             System.out.println("Não há palavras disponíveis para o que você escolheu.");
         }
+        entrada.close();
     }
 }

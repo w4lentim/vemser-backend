@@ -29,5 +29,6 @@ public class Exercicio2 {
         } else {
             System.out.println("Você foi aprovado. Parabéns!");
         }
+        entrada.close();
     }
 }

@@ -17,5 +17,7 @@ public class Exercicio8 {
         double areaRetangulo = base * altura;
 
         System.out.printf("De acordo com os dados informados, o retângulo possui uma área de: %.2f cm²\n", areaRetangulo);
+
+        entrada.close();
     }
 }

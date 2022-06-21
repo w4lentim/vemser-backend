@@ -21,5 +21,6 @@ public class Exercicio5 {
 
         // Exibindo o salário do usuário;
         System.out.printf("\nObrigado pelas informações.\nSeu salário é de: R$: %.2f", salarioTotal);
+        entrada.close();
     }
 }

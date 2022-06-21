@@ -21,5 +21,7 @@ public class Exercicio9 {
         int idadeEmDias = dias + (anos * 365) + (meses * 30);
 
         System.out.printf("Sua idade em dias é: %d dias de vida.", idadeEmDias);
+
+        entrada.close();
     }
 }

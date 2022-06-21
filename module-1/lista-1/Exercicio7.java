@@ -21,5 +21,7 @@ public class Exercicio7 {
         b = temp;
 
         System.out.printf("Valor das variáveis:\nA: %d\nB: %d\n", a, b);
+
+        entrada.close();
     }
 }

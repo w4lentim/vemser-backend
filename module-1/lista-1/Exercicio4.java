@@ -66,5 +66,6 @@ public class Exercicio4 {
         } else {
             System.out.println("Estado informado inválido ou não disponível para consulta.");
         }
+        entrada.close();
     }
 }

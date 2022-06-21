@@ -18,5 +18,6 @@ public class Exercicio3 {
             double troco = valorPago - valorConsumido;
             System.out.printf("\nO troco do cliente é de R$: %.2f\n", troco);
         }
+        entrada.close();
     }
 }
