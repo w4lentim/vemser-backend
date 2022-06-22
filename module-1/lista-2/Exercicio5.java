@@ -17,13 +17,10 @@ public class Exercicio5 {
         // Array na ordem que o usuário informou;
         System.out.println("Array informado: " + Arrays.toString(array));
 
-        for(int inicio = 0, fim = array.length - 1; inicio < fim; inicio++, fim--) {
-            int temp = array[inicio];
-            array[inicio] = array[fim];
-            array[fim] = temp;
-        }
         // Array na ordem inversa;
-        System.out.println("Array invertido: " + Arrays.toString(array));
+        for(int j = array.length - 1; j >= 0; j--) {
+            System.out.println(array[j]);
+        }
         input.close();
     }
 }
