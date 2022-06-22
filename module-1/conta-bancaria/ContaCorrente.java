@@ -5,15 +5,18 @@ public class ContaCorrente {
     String numeroDaConta;
     int agencia;
     Double saldo = 0.0;
-    Double chequeEspecial;
+    Double chequeEspecial = 0.0;
 
     // Imprimir conta corrente;
     void imprimirContaCorrente() {
+        cliente.imprimirCliente();
         System.out.println("Cliente: " + cliente.nome +
                 "\nNúmero da conta: " + numeroDaConta +
                 "\nAgência: " + agencia +
                 "\nSaldo R$: " + saldo +
                 "\nCheque Especial R$: " + chequeEspecial);
+        cliente.imprimirContatos();
+        cliente.imprimirEnderecos();
     }
 
     // Validação para o saque na conta;
