@@ -8,15 +8,19 @@ public class Cliente {
 
     // Exibir contatos do cliente de acordo com o contido na classe Contato.java;
     void imprimirContatos() {
-        for (Contato con : contatos) {
-            con.imprimirContato();
+        for(int i = 0; i < contatos.length; i++) {
+            if (contatos[i] != null) {
+                contatos[i].imprimirContato();
+            }
         }
     }
 
     // Exibir o endereço do cliente de acordo com o contido na classe Endereco.java;
     void imprimirEnderecos() {
-        for (Endereco end : enderecos) {
-            end.imprimirEndereco();
+        for(int j = 0; j < enderecos.length; j++) {
+            if(enderecos[j] != null) {
+                enderecos[j].imprimirEndereco();
+            }
         }
     }
 
