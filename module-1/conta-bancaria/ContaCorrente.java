@@ -18,7 +18,7 @@ public class ContaCorrente {
 
     // Validação para o saque na conta;
     boolean saque(double valor) {
-        if (valor > 0 && (saldo + chequeEspecial) > valor) {
+        if (valor <= (saldo + chequeEspecial) && valor > 0) {
             saldo -= valor;
             return true;
         } else {
@@ -40,7 +40,7 @@ public class ContaCorrente {
     }
     // Validação de transferência de valores entre as contas;
     boolean transferir(ContaCorrente numeroDaContaTransf, double valor) {
-        if (valor > 0 && (saldo + chequeEspecial) > valor) {
+        if (valor <= (saldo + chequeEspecial) && valor > 0) {
             saldo -= valor;
             numeroDaContaTransf.saldo += valor;
             return true;
