@@ -10,18 +10,18 @@ public class ContaCorrente {
     // Imprimir conta corrente;
     void imprimirContaCorrente() {
         cliente.imprimirCliente();
-        System.out.println("Cliente: " + cliente.nome +
-                "\nNúmero da conta: " + numeroDaConta +
-                "\nAgência: " + agencia +
-                "\nSaldo R$: " + saldo +
-                "\nCheque Especial R$: " + chequeEspecial);
+        System.out.println("Cliente: " + this.cliente.nome +
+                "\nNúmero da conta: " + this.numeroDaConta +
+                "\nAgência: " + this.agencia +
+                "\nSaldo R$: " + this.saldo +
+                "\nCheque Especial R$: " + this.chequeEspecial);
         cliente.imprimirContatos();
         cliente.imprimirEnderecos();
     }
 
     // Validação para o saque na conta;
     boolean saque(double valor) {
-        if (valor <= (saldo + chequeEspecial) && valor > 0) {
+        if (valor <= (this.saldo + this.chequeEspecial) && valor > 0) {
             saldo -= valor;
             return true;
         } else {
@@ -39,14 +39,12 @@ public class ContaCorrente {
     }
     // Exibir ao usuário seu saldo da conta e do cheque especial;
     double retornarSaldoComCheque() {
-        return saldo + chequeEspecial;
+        return this.saldo + this.chequeEspecial;
     }
     // Validação de transferência de valores entre as contas;
     boolean transferir(ContaCorrente numeroDaContaTransf, double valor) {
-        if (valor <= (saldo + chequeEspecial) && valor > 0) {
-            saldo -= valor;
-            numeroDaContaTransf.saldo += valor;
-            return true;
+        if (this.saque(valor)) {
+            return numeroDaContaTransf.deposito(valor);
         } else {
             return false;
         }

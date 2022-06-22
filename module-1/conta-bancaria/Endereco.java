@@ -14,10 +14,10 @@ public class Endereco {
     void imprimirEndereco() {
         switch (tipo) {
             case 1 -> {
-                System.out.printf("\nEndereço residencial:\nLogradouro: %s\nNúmero: %d\nCEP: %s\nCidade: %s\nEstado: %s\nPaís: %s\n", logradouro, numero, cep, cidade, estado, pais);
+                System.out.printf("\nEndereço residencial:\nLogradouro: %s\nNúmero: %d\nCEP: %s\nCidade: %s\nEstado: %s\nPaís: %s\n", this.logradouro, this.numero, this.cep, this.cidade, this.estado, this.pais);
             }
             case 2 -> {
-                System.out.printf("\nEndereço comercial:\nLogradouro: %s\nNúmero: %d\nCEP: %s\nCidade: %s\nEstado: %s\nPaís: %s\n", logradouro, numero, cep, cidade, estado, pais);
+                System.out.printf("\nEndereço comercial:\nLogradouro: %s\nNúmero: %d\nCEP: %s\nCidade: %s\nEstado: %s\nPaís: %s\n", this.logradouro, this.numero, this.cep, this.cidade, this.estado, this.pais);
             }
             default -> {
                 System.out.println("Tipo de endereço inválido. Informe um tipo válido!");

@@ -26,7 +26,7 @@ public class Cliente {
 
     // Exibir os dados do cliente;
     void imprimirCliente() {
-        System.out.println("Nome do cliente: " + nome +
-        "\nCPF: " + cpf);
+        System.out.println("Nome do cliente: " + this.nome +
+        "\nCPF: " + this.cpf);
     }
 }

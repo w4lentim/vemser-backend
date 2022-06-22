@@ -9,10 +9,10 @@ public class Contato {
     void imprimirContato() {
         switch (tipo) {
             case 1 -> {
-                System.out.printf("\nContato residencial: %s\n", telefone);
+                System.out.printf("\nContato residencial: %s\n", this.telefone);
             }
             case 2 -> {
-                System.out.printf("\nContato comercial: %s\n", telefone);
+                System.out.printf("\nContato comercial: %s\n", this.telefone);
             }
             default -> {
                 System.out.println("Tipo de contato inválido. É necessário informar um tipo válido!");
