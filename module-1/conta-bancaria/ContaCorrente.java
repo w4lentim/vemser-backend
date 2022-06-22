@@ -9,14 +9,11 @@ public class ContaCorrente {
 
     // Imprimir conta corrente;
     void imprimirContaCorrente() {
-        cliente.imprimirCliente();
         System.out.println("Cliente: " + this.cliente.nome +
                 "\nNúmero da conta: " + this.numeroDaConta +
                 "\nAgência: " + this.agencia +
                 "\nSaldo R$: " + this.saldo +
                 "\nCheque Especial R$: " + this.chequeEspecial);
-        cliente.imprimirContatos();
-        cliente.imprimirEnderecos();
     }
 
     // Validação para o saque na conta;

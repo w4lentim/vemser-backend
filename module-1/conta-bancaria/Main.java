@@ -51,7 +51,6 @@ public class Main {
         clienteConta1.agencia = 1010;
         clienteConta1.saldo = 1000.00;
         clienteConta1.chequeEspecial = 550.00;
-        clienteConta1.imprimirContaCorrente(); // Imprimindo dados de conta corrente cliente 1;
 
         // Configurando dados para o cliente 2;
         Cliente cliente2 = new Cliente();
@@ -103,7 +102,6 @@ public class Main {
         clienteConta2.agencia = 0202;
         clienteConta2.saldo = 1500.00;
         clienteConta2.chequeEspecial = 1050.00;
-        clienteConta2.imprimirContaCorrente(); // Imprimir dados de conta corrente do cliente 2;
 
         // Operando na conta do cliente 1;
         clienteConta1.imprimirContaCorrente();
@@ -125,8 +123,9 @@ public class Main {
         // Efetuando transferência cliente 1 -> cliente 2;
         clienteConta1.transferir(clienteConta2, 200);
         clienteConta1.imprimirContaCorrente();
+        System.out.printf("--------------------------------------\n");
         // Efetuando transferência cliente 2 -> cliente 1;
         clienteConta2.transferir(clienteConta1, 100);
-        clienteConta1.imprimirContaCorrente();
+        clienteConta2.imprimirContaCorrente();
     }
 }
