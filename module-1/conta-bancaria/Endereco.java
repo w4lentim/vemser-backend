@@ -19,6 +19,9 @@ public class Endereco {
             case 2 -> {
                 System.out.printf("\nEndereço comercial:\nLogradouro: %s\nNúmero: %d\nCEP: %s\nCidade: %s\nEstado: %s\nPaís: %s\n", logradouro, numero, cep, cidade, estado, pais);
             }
+            default -> {
+                System.out.println("Tipo de endereço inválido. Informe um tipo válido!");
+            }
         }
     }
 }

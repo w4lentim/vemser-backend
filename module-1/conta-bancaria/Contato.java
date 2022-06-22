@@ -14,6 +14,9 @@ public class Contato {
             case 2 -> {
                 System.out.printf("\nContato comercial: %s\n", telefone);
             }
+            default -> {
+                System.out.println("Tipo de contato inválido. É necessário informar um tipo válido!");
+            }
         }
     }
 }

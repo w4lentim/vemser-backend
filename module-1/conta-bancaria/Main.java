@@ -1,10 +1,10 @@
 public class Main {
     public static void main(String[] args) {
         
-        // Configurando dados para o usuário 1;
-        Cliente usuario1 = new Cliente();
-        usuario1.nome = "Willian Valentim";
-        usuario1.cpf = "12345678910";
+        // Configurando dados para o cliente 1;
+        Cliente cliente1 = new Cliente();
+        cliente1.nome = "Willian Valentim";
+        cliente1.cpf = "12345678910";
 
         Contato contato1 = new Contato();
         Contato contato2 = new Contato();
@@ -16,8 +16,8 @@ public class Main {
         contato2.telefone = "30333434";
         contato2.tipo = 2;
 
-        usuario1.contatos[0] = contato1;
-        usuario1.contatos[1] = contato2;
+        cliente1.contatos[0] = contato1;
+        cliente1.contatos[1] = contato2;
 
         Endereco endereco1 = new Endereco();
         Endereco endereco2 = new Endereco();
@@ -40,22 +40,23 @@ public class Main {
         endereco2.estado = "Ceará";
         endereco2.pais = "Brasil";
 
-        usuario1.enderecos[0] = endereco1;
-        usuario1.enderecos[1] = endereco2;
+        cliente1.enderecos[0] = endereco1;
+        cliente1.enderecos[1] = endereco2;
 
-        // Configurando conta para o usuário 1;
-        ContaCorrente usuarioConta1 = new ContaCorrente();
+        // Configurando conta para o cliente 1;
+        ContaCorrente clienteConta1 = new ContaCorrente();
 
-        usuarioConta1.cliente = usuario1;
-        usuarioConta1.numeroDaConta = "00001";
-        usuarioConta1.agencia = 1010;
-        usuarioConta1.saldo = 1000.00;
-        usuarioConta1.chequeEspecial = 550.00;
+        clienteConta1.cliente = cliente1;
+        clienteConta1.numeroDaConta = "00001";
+        clienteConta1.agencia = 1010;
+        clienteConta1.saldo = 1000.00;
+        clienteConta1.chequeEspecial = 550.00;
+        clienteConta1.imprimirContaCorrente(); // Imprimindo dados de conta corrente cliente 1;
 
-        // Configurando dados para o usuário 2;
-        Cliente usuario2 = new Cliente();
-        usuario2.nome = "Natanael Silva";
-        usuario2.cpf = "10111122233";
+        // Configurando dados para o cliente 2;
+        Cliente cliente2 = new Cliente();
+        cliente2.nome = "Natanael Silva";
+        cliente2.cpf = "10111122233";
 
         Contato contato11 = new Contato();
         Contato contato22 = new Contato();
@@ -67,8 +68,8 @@ public class Main {
         contato22.telefone = "31445566";
         contato22.tipo = 2;
 
-        usuario2.contatos[0] = contato11;
-        usuario2.contatos[1] = contato22;
+        cliente2.contatos[0] = contato11;
+        cliente2.contatos[1] = contato22;
 
         Endereco endereco11 = new Endereco();
         Endereco endereco22 = new Endereco();
@@ -91,40 +92,44 @@ public class Main {
         endereco22.estado = "Ceará";
         endereco22.pais = "Brasil";
 
-        usuario2.enderecos[0] = endereco11;
-        usuario2.enderecos[1] = endereco22;
+        cliente2.enderecos[0] = endereco11;
+        cliente2.enderecos[1] = endereco22;
 
-        // Configurando conta para o usuário 2;
-        ContaCorrente usuarioConta2 = new ContaCorrente();
+        // Configurando conta para o Cliente 2;
+        ContaCorrente clienteConta2 = new ContaCorrente();
 
-        usuarioConta2.cliente = usuario2;
-        usuarioConta2.numeroDaConta = "00002";
-        usuarioConta2.agencia = 0202;
-        usuarioConta2.saldo = 1500.00;
-        usuarioConta2.chequeEspecial = 1050.00;
+        clienteConta2.cliente = cliente2;
+        clienteConta2.numeroDaConta = "00002";
+        clienteConta2.agencia = 0202;
+        clienteConta2.saldo = 1500.00;
+        clienteConta2.chequeEspecial = 1050.00;
+        clienteConta2.imprimirContaCorrente(); // Imprimir dados de conta corrente do cliente 2;
 
-        // Exibir os dados das contas e clientes;
-        usuario1.imprimirCliente();
-        usuario1.imprimirContatos();
-        usuario1.imprimirEnderecos();
-        usuarioConta1.imprimirContaCorrente();
-        usuarioConta1.deposito(200.00);
-        usuarioConta1.saque(100.00);
-        System.out.printf("\nSaldo do Cheque Especial da conta R$: %.2f\n", usuarioConta1.retornarSaldoComCheque());
+        // Operando na conta do cliente 1;
+        cliente1.imprimirCliente();
+        cliente1.imprimirContatos();
+        cliente1.imprimirEnderecos();
+        clienteConta1.imprimirContaCorrente();
+        // Depósito e saque na conta do cliente 1;
+        clienteConta1.deposito(200.00);
+        clienteConta1.saque(100.00);
+        System.out.printf("\nSaldo do Cheque Especial da conta R$: %.2f\n", clienteConta1.retornarSaldoComCheque());
 
-        usuario2.imprimirCliente();
-        usuario2.imprimirContatos();
-        usuario2.imprimirEnderecos();
-        usuarioConta2.imprimirContaCorrente();
-        usuarioConta2.deposito(1200.00);
-        usuarioConta2.saque(200.00);
-        System.out.printf("\nSaldo do Cheque Especial da conta R$: %.2f\n", usuarioConta2.retornarSaldoComCheque());
+        // Operando na conta do cliente 2;
+        cliente2.imprimirCliente();
+        cliente2.imprimirContatos();
+        cliente2.imprimirEnderecos();
+        clienteConta2.imprimirContaCorrente();
+        // Depósito e saque na conta do cliente 2;
+        clienteConta2.deposito(1200.00);
+        clienteConta2.saque(200.00);
+        System.out.printf("\nSaldo do Cheque Especial da conta R$: %.2f\n", clienteConta2.retornarSaldoComCheque());
 
-        // Efetuando transferência entre as contas;
-        usuarioConta1.transferir(usuarioConta2, 200);
-        usuarioConta1.imprimirContaCorrente();
-
-        usuarioConta2.transferir(usuarioConta1, 100);
-        usuarioConta1.imprimirContaCorrente();
+        // Efetuando transferência cliente 1 -> cliente 2;
+        clienteConta1.transferir(clienteConta2, 200);
+        clienteConta1.imprimirContaCorrente();
+        // Efetuando transferência cliente 2 -> cliente 1;
+        clienteConta2.transferir(clienteConta1, 100);
+        clienteConta1.imprimirContaCorrente();
     }
 }
