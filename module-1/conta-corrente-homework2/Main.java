@@ -10,7 +10,8 @@ public class Main {
 
         Cliente primeiroCliente = new Cliente("Willian Valentim", "111.222.333-44", new Contato[]{primeiroClienteContato1, primeiroClienteContato2}, new Endereco[]{primeiroClienteEndereco1, primeiroClienteEndereco2});
 
-        ContaCorrente primeiroClienteConta = new ContaCorrente(primeiroCliente, "00001", 1010, 1000.00, 550.00);
+        ContaCorrente primeiroClienteContaCorrente = new ContaCorrente(primeiroCliente, "00001", 1010, 1000.00, 550.00);
+        ContaPoupanca primeiroClienteContaPoupanca = new ContaPoupanca(primeiroCliente, "01001", 1111, 2000.00);
         // FINALIZAÇÃO DA CONTA DO PRIMEIRO CLIENTE ---------------------------------------- //
 
         // INÍCIO DA CONFIGURAÇÃO PARA CRIAR CONTA SEGUNDO CLIENTE ------------------------- //
@@ -22,7 +23,8 @@ public class Main {
 
         Cliente segundoCliente = new Cliente("Wesley Valentim", "555.666.777-88", new Contato[]{segundoClienteContato1, segundoClienteContato2}, new Endereco[]{segundoClienteEndereco1, segundoClienteEndereco2});
 
-        ContaCorrente segundoClienteConta = new ContaCorrente(segundoCliente, "00002", 2020, 1500.00, 1100.00);
+        ContaCorrente segundoClienteContaCorrente = new ContaCorrente(segundoCliente, "00002", 2020, 1500.00, 1100.00);
+        ContaPoupanca segundoClienteContaPoupanca = new ContaPoupanca(segundoCliente, "02002", 2222, 3000.00);
         // FINALIZAÇÃO DA CONTA DO SEGUNDO CLIENTE ---------------------------------------- //
 
         // IMPRIMINDO DADOS DO CLIENTE 1;
@@ -35,14 +37,21 @@ public class Main {
         primeiroCliente.imprimirEnderecos();
         System.out.println("___________________________________");
 
-        primeiroClienteConta.imprimirDadosConta();
+        primeiroClienteContaCorrente.imprimirDadosConta();
+        System.out.println("___________________________________");
+
+        primeiroClienteContaPoupanca.imprimirDadosConta();
         System.out.println("___________________________________");
         // FIM DA IMPRESSÃO DOS DADOS CLIENTE 1;
 
         // OPERAÇÕES DE SAQUE/DEPOSITO NA CONTA DO CLIENTE 1;
-        primeiroClienteConta.deposito(200.00);
-        primeiroClienteConta.saque(100.00);
-        System.out.printf("\nSaldo do Cheque Especial da conta R$: %.2f\n", primeiroClienteConta.retornarSaldoComChequeEspecial());
+        primeiroClienteContaCorrente.deposito(200.00);
+        primeiroClienteContaCorrente.saque(100.00);
+        System.out.println("Saldo da Conta Corrente: " + primeiroClienteContaCorrente.getSaldo());
+        System.out.printf("\nSaldo do Cheque Especial + Saldo da Conta Corrente R$: %.2f\n", primeiroClienteContaCorrente.retornarSaldoComChequeEspecial());
+        System.out.println("Saldo da Conta Poupança: " + primeiroClienteContaPoupanca.getSaldo());
+        primeiroClienteContaPoupanca.creditarTaxa();
+        System.out.println("Saldo da Conta Poupança com taxa creditada: " + primeiroClienteContaPoupanca.getSaldo());
         System.out.println("___________________________________");
         // FIM DAS OPERAÇÕES;
 
@@ -56,24 +65,32 @@ public class Main {
         segundoCliente.imprimirEnderecos();
         System.out.println("___________________________________");
 
-        segundoClienteConta.imprimirDadosConta();
+        segundoClienteContaCorrente.imprimirDadosConta();
+        System.out.println("___________________________________");
+
+        segundoClienteContaPoupanca.imprimirDadosConta();
         System.out.println("___________________________________");
         // FIM DA IMPRESSÃO DOS DADOS CLIENTE 2;
 
         // OPERAÇÕES DE SAQUE/DEPOSITO NA CONTA DO CLIENTE 2;
-        segundoClienteConta.deposito(1200.00);
-        segundoClienteConta.saque(200.00);
-        System.out.printf("\nSaldo do Cheque Especial da conta R$: %.2f\n", segundoClienteConta.retornarSaldoComChequeEspecial());
+        segundoClienteContaCorrente.deposito(1200.00);
+        segundoClienteContaCorrente.saque(200.00);
+        System.out.println("Saldo da Conta Corrente: " + segundoClienteContaCorrente.getSaldo());
+        System.out.printf("\nSaldo do Cheque Especial + Saldo Conta Corrente R$: %.2f\n", segundoClienteContaCorrente.retornarSaldoComChequeEspecial());
+        System.out.println("Saldo da Conta Poupança: " + segundoClienteContaPoupanca.getSaldo());
+        segundoClienteContaPoupanca.creditarTaxa();
+        System.out.println("Saldo da Conta Poupança com taxa creditada: " + segundoClienteContaPoupanca.getSaldo());
+        
 
         // TRANSAÇÕES ENTRE AS CONTAS 1 E 2 (CONTA 1 --> CONTA 2);
-        primeiroClienteConta.transferir(segundoClienteConta, 200);
+        primeiroClienteContaCorrente.transferir(segundoClienteContaCorrente, 200);
         System.out.println("___________________________________");
-        primeiroClienteConta.imprimirDadosConta();
+        primeiroClienteContaCorrente.imprimirDadosConta();
         System.out.println("___________________________________");
 
         // TRANSAÇÕES ENTRE AS CONTAS 1 E 2 (CONTA 2 --> CONTA 1);
-        segundoClienteConta.transferir(primeiroClienteConta, 100);
-        segundoClienteConta.imprimirDadosConta();
+        segundoClienteContaCorrente.transferir(primeiroClienteContaCorrente, 100);
+        segundoClienteContaCorrente.imprimirDadosConta();
         System.out.println("___________________________________");
     }
 }
