@@ -29,7 +29,7 @@ public class ContaCorrente extends Conta implements Impressao {
     @Override
     public void imprimirDadosConta() {
         System.out.println("Cliente: " + this.getCliente() +
-                "\nNúmero da conta: " + this.getNumeroDaConta() +
+                "\nNúmero da conta Corrente: " + this.getNumeroDaConta() +
                 "\nNúmero da agência: " + this.getAgencia() +
                 "\nSaldo R$: " + this.getSaldo() +
                 "\nCheque Especial R$: " + this.chequeEspecial);

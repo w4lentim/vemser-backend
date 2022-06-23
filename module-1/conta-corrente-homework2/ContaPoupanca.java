@@ -10,7 +10,7 @@ public class ContaPoupanca extends Conta implements Impressao {
     public void imprimirDadosConta() {
         System.out.println("__________________"
         + "\nCliente: " + this.getCliente().getNome()
-        + "\nNúmero da conta: " + this.getNumeroDaConta()
+        + "\nNúmero da conta Poupança: " + this.getNumeroDaConta()
         + "\nNúmero da agência: " + this.getAgencia()
         + "\nSaldo: " + this.getSaldo()
         + "\nJuros mensal: " + JUROS_MENSAL);
