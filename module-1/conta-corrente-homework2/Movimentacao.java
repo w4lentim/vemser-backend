@@ -1,6 +1,7 @@
 public interface Movimentacao {
     
-    public boolean saque(Double valor);
-    public boolean deposito(Double valor);
+    public boolean sacar(Double valor);
+    public boolean depositar(Double valor);
+    public boolean transferir(Conta numeroConta, Double valor);
     
 }

@@ -1,7 +1,6 @@
 public class Endereco {
 
-    // Variáveis da classe;
-    private Integer tipo; // (Se for 1, deverá informar o end. residencial; Se for 2, informar end. comercial);
+    private Integer tipo;
     private String logradouro;
     private Integer numero;
     private String complemento;
@@ -9,6 +8,8 @@ public class Endereco {
     private String cidade;
     private String estado;
     private String pais;
+
+    public Endereco() {};
 
     public Endereco(Integer tipo, String logradouro, Integer numero, String complemento, String cep, String cidade, String estado, String pais) {
         this.tipo = tipo;
@@ -21,7 +22,6 @@ public class Endereco {
         this.pais = pais;
     }
 
-    // Exibir o endereço do cliente;
     public Integer getTipo() {
         return tipo;
     }

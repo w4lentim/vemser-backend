@@ -17,7 +17,7 @@ public class ContaCorrente extends Conta implements Impressao {
     }
 
     @Override
-    public boolean saque(Double valor) {
+    public boolean sacar(Double valor) {
         if (valor <= (this.retornarSaldoComChequeEspecial()) && valor > 0) {
             this.setSaldo(this.getSaldo() - valor);
             return true;
@@ -27,7 +27,7 @@ public class ContaCorrente extends Conta implements Impressao {
     }
 
     @Override
-    public void imprimirDadosConta() {
+    public void imprimir() {
         System.out.println("Cliente: " + this.getCliente() +
                 "\nNúmero da conta Corrente: " + this.getNumeroDaConta() +
                 "\nNúmero da agência: " + this.getAgencia() +

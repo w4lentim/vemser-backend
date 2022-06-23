@@ -7,7 +7,7 @@ public class ContaPoupanca extends Conta implements Impressao {
     }
 
     @Override
-    public void imprimirDadosConta() {
+    public void imprimir() {
         System.out.println("__________________"
         + "\nCliente: " + this.getCliente().getNome()
         + "\nNúmero da conta Poupança: " + this.getNumeroDaConta()

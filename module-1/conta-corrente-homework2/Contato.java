@@ -1,9 +1,8 @@
 public class Contato {
 
-    // Variáveis da classe;
     private String descricao;
     private String telefone;
-    private Integer tipo; // Se o contato for 1, informar residencial, se for 2, comercial;
+    private Integer tipo;
 
     public Contato (String descricao, String telefone, Integer tipo){
         this.descricao = descricao;
@@ -35,7 +34,6 @@ public class Contato {
         this.tipo = tipo;
     }
 
-    // Retornando os dados ao usuário;
     void imprimirContato() {
         switch (getTipo()) {
             case 1 -> {

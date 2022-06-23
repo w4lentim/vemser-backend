@@ -1,5 +1,5 @@
 public interface Impressao {
     
-    public void imprimirDadosConta();
+    public void imprimir();
 
 }

@@ -4,7 +4,7 @@ public abstract class Conta implements Movimentacao {
     private String numeroDaConta;
     private Integer agencia;
     private Double saldo;
-
+    
     public Conta(Cliente cliente, String numeroDaConta, Integer agencia, Double saldo) {
         this.cliente = cliente;
         this.numeroDaConta = numeroDaConta;
@@ -12,7 +12,6 @@ public abstract class Conta implements Movimentacao {
         this.saldo = saldo;
     }
 
-    // Gettet's e Setter's
     public Cliente getCliente() {
         return cliente;
     }
@@ -38,26 +37,27 @@ public abstract class Conta implements Movimentacao {
         this.saldo = saldo;
     }
 
-    // Métodos;
-    public boolean saque(Double valor) {
+    public boolean sacar(Double valor) {
         if (valor <= (this.getSaldo()) && valor > 0) {
-            this.saldo -= valor;
+            this.setSaldo(this.getSaldo() - valor);
             return true;
         } else {
             return false;
         }
     }
-    public boolean deposito(Double valor) {
+
+    public boolean depositar(Double valor) {
         if (valor > 0) {
-            this.saldo += valor;
+            this.setSaldo(this.getSaldo() + valor);
             return true;
         } else {
             return false;
         }
     }
-    public boolean transferir(Conta numeroConta, double valor) {
-        if (this.saque(valor)) {
-            return numeroConta.deposito(valor);
+
+    public boolean transferir(Conta numeroConta, Double valor) {
+        if (this.sacar(valor)) {
+            return numeroConta.depositar(valor);
         } else {
             return false;
         }
