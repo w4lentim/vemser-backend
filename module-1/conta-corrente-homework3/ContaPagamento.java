@@ -8,17 +8,19 @@ public class ContaPagamento extends Conta implements Impressao {
 
     @Override
     public boolean sacar(Double valor) {
-        if (valor < (this.getSaldo() + TAXA_SAQUE) && valor > 0) {
-            this.setSaldo(this.getSaldo() - valor);
+        if (this.getSaldo() >= (valor + TAXA_SAQUE) && valor > 0) {
+            this.setSaldo(this.getSaldo() - (valor + TAXA_SAQUE));
             return true;
         } else {
+            System.out.println("Não foi possível realizar o saque. Seu saldo é insuficiente!");
             return false;
         }
     }
 
     @Override
     public boolean transferir(Conta numeroConta, Double valor) {
-        if (this.getSaldo() >= valor && valor > 0) {
+        if (valor <= this.getSaldo() && valor > 0) {
+            this.setSaldo(this.getSaldo() - valor);
             return numeroConta.depositar(valor);
         } else {
             return false;

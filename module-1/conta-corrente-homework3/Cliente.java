@@ -25,21 +25,21 @@ public class Cliente {
     }
 
     public void imprimirContatos() {
-        for (Contato i : contatos) {
-            if (i != null) {
-                i.imprimirContato();
-            } else {
-                System.out.println("Não foi cadastrado um contato.");
+        if (contatos != null) {
+            for (Contato i : contatos) {
+                if (i != null) {
+                    i.imprimirContato();
+                }
             }
         }
     }
 
     public void imprimirEnderecos() {
-        for (Endereco j : enderecos) {
-            if (j != null) {
-                j.imprimirEndereco();
-            } else {
-                System.out.println("Não foi cadastrado um endereço.");
+        if (enderecos != null) {
+            for (Endereco j : enderecos) {
+                if (j != null) {
+                    j.imprimirEndereco();
+                }
             }
         }
     }

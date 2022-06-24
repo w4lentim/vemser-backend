@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
 
         Contato primeiroContatoCliente1 = new Contato("Celular", "(85) 91111-2222", 1);
-        Contato segundoContatoCliente1 = new Contato("Fixo", "(85) 1111-2222", 2);
+        Contato segundoContatoCliente1 = new Contato("Fixo", "(85) 3333-0000", 2);
 
         Contato primeiroContatoCliente2 = new Contato("Celular", "(85) 93333-4444", 1);
         Contato segundoContatoCliente2 = new Contato("Fixo", "(85) 3333-4444", 2);
@@ -43,12 +43,14 @@ public class Main {
         // CLIENTE 1;
         cliente1.imprimirCliente();
         cliente1.imprimirContatos();
+        System.out.println("___________________________________");
         cliente1.imprimirEnderecos();
         System.out.println("___________________________________");
 
         // CLIENTE 2;
         cliente2.imprimirCliente();
         cliente2.imprimirContatos();
+        System.out.println("___________________________________");
         cliente2.imprimirEnderecos();
         System.out.println("___________________________________");
 
@@ -113,14 +115,26 @@ public class Main {
         System.out.println("\nSaldo na Conta Pagamento (cliente 1) após a transferência: " + contaPagamentoCliente1.getSaldo());
         System.out.println("___________________________________");
 
+        // SAQUE NA CONTA PAGAMENTO (VERIFICANDO TAXA);
+        System.out.println("SAQUE NA CONTA PAGAMENTO (CLIENTE 1)");
+        System.out.println("\nSaldo Conta Pagamento antes do saque: " + contaPagamentoCliente1.getSaldo());
+        contaPagamentoCliente1.sacar(300.00);
+        System.out.println("\nSaldo Conta Pagamento após o saque (creditado a taxa): " + contaPagamentoCliente1.getSaldo());
+        System.out.println("___________________________________");
+
+        // TRANSFERÊNCIA NA CONTA PAGAMENTO (VERIFICAR SE COBRA TAXA);
+        System.out.println("TRANSFERÊNCIA NA CONTA PAGAMENTO (CLIENTE 1)");
+        System.out.println("\nSaldo Conta Pagamento antes da transferência: " + contaPagamentoCliente1.getSaldo());
+        contaPagamentoCliente1.transferir(contaCorrenteCliente1, 500.00);
+        System.out.println("\nSaldo Conta Pagamento após transferência: " + contaPagamentoCliente1.getSaldo());
+        System.out.println("\nSaldo da Conta Corrente após receber a transferência: " + contaCorrenteCliente1.getSaldo());
+        System.out.println("___________________________________");
+
         System.out.println("IMPRIMINDO OS DADOS FINAIS DAS CONTAS:\n");
         contaCorrenteCliente1.imprimir();
         System.out.println("___________________________________");
         contaPagamentoCliente1.imprimir();
         System.out.println("___________________________________");
         contaPoupancaCliente2.imprimir();
-
-        
-
     }
 }
