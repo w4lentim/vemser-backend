@@ -17,15 +17,6 @@ public class ContaPagamento extends Conta implements Impressao {
     }
 
     @Override
-    public boolean transferir(Conta numeroConta, Double valor) {
-        if (this.getSaldo() >= valor && valor > 0) {
-            return numeroConta.depositar(valor);
-        } else {
-            return false;
-        }
-    }
-
-    @Override
     public void imprimir() {
         System.out.println("Cliente: " + this.getCliente() + "\nNúmero da Conta de Pagamento: " + this.getNumeroDaConta() + "\nNúmero da agência: " + this.getAgencia() + "\nSaldo da conta: " + this.getSaldo());
     }
