@@ -13,10 +13,11 @@ public class ContaPoupanca extends Conta implements Impressao {
         + "\nNúmero da conta Poupança: " + this.getNumeroDaConta()
         + "\nNúmero da agência: " + this.getAgencia()
         + "\nSaldo: " + this.getSaldo()
-        + "\nJuros mensal: " + JUROS_MENSAL);
+        + "\nJuros mensal: " + creditarTaxa());
     }
 
-    public void creditarTaxa() {
+    public String creditarTaxa() {
         this.setSaldo(this.getSaldo() * JUROS_MENSAL);
+        return "" + getSaldo();
     }
 }

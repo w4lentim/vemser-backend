@@ -24,7 +24,7 @@ public class Main {
         Cliente segundoCliente = new Cliente("Wesley Valentim", "555.666.777-88", new Contato[]{segundoClienteContato1, segundoClienteContato2}, new Endereco[]{segundoClienteEndereco1, segundoClienteEndereco2});
 
         ContaCorrente segundoClienteContaCorrente = new ContaCorrente(segundoCliente, "00002", 2020, 1500.00, 1100.00);
-        ContaPoupanca segundoClienteContaPoupanca = new ContaPoupanca(segundoCliente, "02002", 2222, 3000.00);
+        ContaPoupanca segundoClienteContaPoupanca = new ContaPoupanca(segundoCliente, "02002", 2222, 1000.00);
         // FINALIZAÇÃO DA CONTA DO SEGUNDO CLIENTE ---------------------------------------- //
 
         // IMPRIMINDO DADOS DO CLIENTE 1;
@@ -80,33 +80,35 @@ public class Main {
         System.out.println("Saldo da Conta Poupança: " + segundoClienteContaPoupanca.getSaldo());
         segundoClienteContaPoupanca.creditarTaxa();
         System.out.println("Saldo da Conta Poupança com taxa creditada: " + segundoClienteContaPoupanca.getSaldo());
+        System.out.println("___________________________________");
         
 
         // TRANSAÇÕES ENTRE AS CONTAS 1 E 2 (CONTA 1 (CORRENTE) --> CONTA 2 (CORRENTE));
         primeiroClienteContaCorrente.transferir(segundoClienteContaCorrente, 200.00);
-        System.out.println("___________________________________");
-        primeiroClienteContaCorrente.imprimir();
-        System.out.println("___________________________________");
-
-        // TRANSAÇÕES ENTRE AS CONTAS 1 E 2 (CONTA 2 --> CONTA 1);
-        segundoClienteContaCorrente.transferir(primeiroClienteContaCorrente, 100.00);
-        segundoClienteContaCorrente.imprimir();
+        System.out.println("\nSaldo Conta Corrente cliente 1 após a transferência: " + primeiroClienteContaCorrente.getSaldo());
+        System.out.println("\nSaldo Conta Corrente cliente 2 após receber a transferência: " + segundoClienteContaCorrente.getSaldo());
         System.out.println("___________________________________");
 
         // TRANSAÇÕES ENTRE AS CONTAS 1 E 2 (CONTA1 (POUPANÇA) --> CONTA 2 (POUPANÇA));
         primeiroClienteContaPoupanca.transferir(segundoClienteContaPoupanca, 200.00);
-        System.out.println("___________________________________");
-        primeiroClienteContaPoupanca.imprimir();
-        System.out.println("___________________________________");
-
-        // TRANSAÇÕES ENTRE AS CONTAS 1 E 2 (CONTA 2 --> CONTA 1);
-        segundoClienteContaPoupanca.transferir(primeiroClienteContaPoupanca, 100.00);
-        segundoClienteContaPoupanca.imprimir();
+        System.out.println("\nSaldo Conta Poupança cliente 1 após a transferência: " + primeiroClienteContaPoupanca.getSaldo());
+        System.out.println("\nSaldo Conta Poupança cliente 2 após receber a transferência: " + primeiroClienteContaPoupanca.getSaldo());
         System.out.println("___________________________________");
 
         // TRANSAÇÃO ENTRE CONTA 1(CORRENTE) --> CONTA2 (POUPANÇA);
         primeiroClienteContaCorrente.transferir(segundoClienteContaPoupanca, 100.00);
+        System.out.println("\nSaldo Conta Corrente cliente 1 após a transferência: " + primeiroClienteContaCorrente.getSaldo());
+        System.out.println("\nSaldo Conta Poupança cliente 2 após a receber transferência: " + segundoClienteContaPoupanca.getSaldo());
+        System.out.println("___________________________________");
+
+        // EXIBINDO OS DADOS DAS CONTAS APÓS AS OPERAÇÕES;
         primeiroClienteContaCorrente.imprimir();
+        System.out.println("___________________________________");
+        primeiroClienteContaPoupanca.imprimir();
+        System.out.println("___________________________________");
+        segundoClienteContaCorrente.imprimir();
+        System.out.println("___________________________________");
+        segundoClienteContaPoupanca.imprimir();
         System.out.println("___________________________________");
     }
 }
