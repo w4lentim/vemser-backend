@@ -29,6 +29,6 @@ public class ContaPagamento extends Conta implements Impressao {
 
     @Override
     public void imprimir() {
-        System.out.println("Cliente: " + this.getCliente() + "\nNúmero da Conta de Pagamento: " + this.getNumeroDaConta() + "\nNúmero da agência: " + this.getAgencia() + "\nSaldo da conta: " + this.getSaldo());
+        System.out.println("Cliente: " + this.getCliente() + "\nNúmero da Conta de Pagamento: " + this.getNumeroDaConta() + "\nNúmero da agência: " + this.getAgencia() + "\nSaldo da conta R$: " + this.getSaldo() + "\nTaxa de Saque R$: " + TAXA_SAQUE);
     }
 }
