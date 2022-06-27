@@ -25,21 +25,17 @@ public class Cliente {
     }
 
     public void imprimirContatos() {
-        if (contatos != null) {
-            for (Contato i : contatos) {
-                if (i != null) {
-                    i.imprimirContato();
-                }
+        for (int i = 0; i < getContatos().size(); i++) {
+            if (contatos.get(i) != null) {
+                contatos.get(i).imprimirContato();
             }
         }
     }
 
     public void imprimirEnderecos() {
-        if (enderecos != null) {
-            for (Endereco j : enderecos) {
-                if (j != null) {
-                    j.imprimirEndereco();
-                }
+        for (int j = 0; j < getEnderecos().size(); j++) {
+            if (enderecos.get(j) != null) {
+                enderecos.get(j).imprimirEndereco();
             }
         }
     }
