@@ -1,3 +1,3 @@
-public class Impressao {
-    
+public interface Impressao {
+    void imprimir();
 }
