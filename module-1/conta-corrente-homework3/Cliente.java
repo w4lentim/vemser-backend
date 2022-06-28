@@ -15,6 +15,7 @@ public class Cliente {
     }
 
     public void imprimirCliente() {
+    if (this.getNome() != null && this.getCpf() != null)
         System.out.println("\nNome do Cliente: " + getNome() + "\nCPF: " + getCpf());
         System.out.println("___________________________________");
     }
