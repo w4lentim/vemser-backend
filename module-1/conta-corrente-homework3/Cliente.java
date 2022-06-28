@@ -26,17 +26,21 @@ public class Cliente {
     }
 
     public void imprimirContatos() {
-        for (int i = 0; i < getContatos().size(); i++) {
-            if (contatos.get(i) != null) {
-                contatos.get(i).imprimirContato();
+        if (contatos != null) {
+            for (int i = 0; i < getContatos().size(); i++) {
+                if (contatos.get(i) != null) {
+                    contatos.get(i).imprimirContato();
+                }
             }
         }
     }
 
     public void imprimirEnderecos() {
-        for (int j = 0; j < getEnderecos().size(); j++) {
-            if (enderecos.get(j) != null) {
-                enderecos.get(j).imprimirEndereco();
+        if (contatos != null) {
+            for (int j = 0; j < getEnderecos().size(); j++) {
+                if (enderecos.get(j) != null) {
+                    enderecos.get(j).imprimirEndereco();
+                }
             }
         }
     }
