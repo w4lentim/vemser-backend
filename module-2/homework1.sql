@@ -6,7 +6,7 @@ id NUMBER NOT NULL,
 nome VARCHAR2(200) NOT NULL,
 data_nascimento DATE NOT NULL,
 nr_matricula NUMBER(10) UNIQUE NOT NULL,
-ativo CHAR(1) NOT NULL,
+ativo CHAR(1),
 PRIMARY KEY (id)
 );
 
