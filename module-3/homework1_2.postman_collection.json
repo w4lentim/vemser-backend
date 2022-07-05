@@ -183,7 +183,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"idContato\": 1,\n    \"idPessoa\": 1,\n    \"tipoContato\": \"COMERCIAL\",\n    \"numero\": \"0859992221\",\n    \"descricao\": \"whatsapp\"\n}",
+							"raw": "{\n    \"tipoContato\": \"COMERCIAL\",\n    \"numero\": \"0859992221\",\n    \"descricao\": \"whatsapp\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -191,7 +191,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://back-vemserdbc.herokuapp.com/contato/1",
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/4",
 							"protocol": "https",
 							"host": [
 								"back-vemserdbc",
@@ -200,7 +200,7 @@
 							],
 							"path": [
 								"contato",
-								"1"
+								"4"
 							]
 						}
 					},
