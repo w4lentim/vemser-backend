@@ -226,6 +226,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Contato Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/1",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
