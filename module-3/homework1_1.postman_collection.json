@@ -160,7 +160,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"foto de fortaleza\",\n}",
+							"raw": "{\n    \"title\": \"foto de fortaleza\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -189,7 +189,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"tittle\": \"foto de fortaleza a noite\"\n}",
+							"raw": "{\n    \"title\": \"foto de fortaleza a noite\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
