@@ -1,6 +1,8 @@
 package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.entity.Pessoa;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+@Repository
 public class PessoaRepository {
 
     private static List<Pessoa> listaPessoas = new ArrayList<>();
@@ -27,7 +30,7 @@ public class PessoaRepository {
         pessoa.setIdPessoa(COUNTER.incrementAndGet());
         listaPessoas.add(pessoa);
         return pessoa;
-    };
+    }
 
     public List<Pessoa> list() { return listaPessoas; }
 
@@ -39,6 +42,7 @@ public class PessoaRepository {
         pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());;
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
+
         return pessoaRecuperada;
     }
 

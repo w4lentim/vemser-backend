@@ -1,11 +1,13 @@
 package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.entity.Contato;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Repository
 public class ContatoRepository {
 
     private static List<Contato> listaContatos = new ArrayList<>();
@@ -28,26 +30,6 @@ public class ContatoRepository {
 
     public List<Contato> list() {
         return listaContatos;
-    }
-
-    public Contato update(Integer id, Contato contatoAtualizar) throws Exception {
-        Contato contatoRecuperado = listaContatos.stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("O contato não foi encontrado."));
-        contatoRecuperado.setIdPessoa(contatoAtualizar.getIdPessoa());
-        contatoRecuperado.setTipo(contatoAtualizar.getTipo());
-        contatoRecuperado.setNumero(contatoAtualizar.getNumero());
-        contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
-        return contatoRecuperado;
-    }
-
-    public void delete(Integer id) throws Exception {
-        Contato contatoRecuperado = listaContatos.stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("O contato não foi encontrado."));
-        listaContatos.remove(contatoRecuperado);
     }
 
     public List<Contato> listById(Integer id) {
