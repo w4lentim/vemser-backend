@@ -13,16 +13,18 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public boolean verify(Pessoa pessoa) {
-        return (pessoa != null && StringUtils.isBlank(pessoa.getNome())
-                && StringUtils.isBlank(pessoa.getCpf())
-                && pessoa.getDataNascimento() != null);
+    public boolean verify(Pessoa pessoa) throws Exception {
+        if (pessoa.getCpf().length() != 11 && (StringUtils.isBlank(pessoa.getNome()))
+        && StringUtils.isEmpty(pessoa.getDataNascimento().toString())
+        && StringUtils.isEmpty(pessoa.getCpf())) {
+            return false;
+        } else {
+            throw new Exception("Os dados informados estão incorretos!");
+        }
     }
 
     public Pessoa create(Pessoa pessoa) throws Exception {
-        if (verify(pessoa)) {
-            throw new Exception("Os dados informados deve conter Pessoa e Nome válidos!");
-        }
+        verify(pessoa);
         return pessoaRepository.create(pessoa);
     }
 
@@ -31,15 +33,7 @@ public class PessoaService {
     }
 
     public Pessoa update(Integer id, Pessoa pessoaAtualizar) throws Exception {
-        Pessoa pessoaRecuperada = pessoaRepository.list().stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("A pessoa não foi encontrada."));
-
-        pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
-        pessoaRecuperada.setNome(pessoaAtualizar.getNome());;
-        pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
-
+        verify(pessoaAtualizar);
         return pessoaRepository.update(id, pessoaAtualizar);
     }
 

@@ -2,26 +2,38 @@ package br.com.vemser.pessoaapi.entity;
 
 public class Endereco {
 
+    private Integer idEndereco;
     private Integer idPessoa;
     private String tipo;
     private String logradouro;
     private Integer numero;
     private String complemento;
+    private String cep;
     private String cidade;
     private String estado;
     private String pais;
 
     public Endereco() {}
 
-    public Endereco(Integer idPessoa, String tipo, String logradouro, Integer numero, String complemento, String cidade, String estado, String pais) {
+    public Endereco(Integer idEndereco, Integer idPessoa, String tipo, String logradouro, Integer numero, String complemento, String cep, String cidade, String estado, String pais) {
+        this.idEndereco = idEndereco;
         this.idPessoa = idPessoa;
         this.tipo = tipo;
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
+        this.cep = cep;
         this.cidade = cidade;
         this.estado = estado;
         this.pais = pais;
+    }
+
+    public Integer getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(Integer idEndereco) {
+        this.idEndereco = idEndereco;
     }
 
     public Integer getIdPessoa() {
@@ -64,6 +76,14 @@ public class Endereco {
         this.complemento = complemento;
     }
 
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
     public String getCidade() {
         return cidade;
     }
@@ -91,11 +111,13 @@ public class Endereco {
     @Override
     public String toString() {
         return "Endereco{" +
-                "idPessoa=" + idPessoa +
+                "idEndereco=" + idEndereco +
+                ", idPessoa=" + idPessoa +
                 ", tipo='" + tipo + '\'' +
                 ", logradouro='" + logradouro + '\'' +
                 ", numero=" + numero +
                 ", complemento='" + complemento + '\'' +
+                ", cep='" + cep + '\'' +
                 ", cidade='" + cidade + '\'' +
                 ", estado='" + estado + '\'' +
                 ", pais='" + pais + '\'' +
