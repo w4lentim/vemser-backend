@@ -12,7 +12,7 @@ public class Endereco {
     @NotEmpty
     @Size (max = 250, message = "Informe um logradouro válido, contendo até 250 caracteres.")
     private String logradouro;
-    @NotEmpty (message = "O número da residência não pode ser vazio/nulo.")
+    @NotNull (message = "O número da residência não pode ser nulo.")
     private Integer numero;
     private String complemento;
     @NotEmpty (message = "O CEP não pode ser vazio/nulo.")
