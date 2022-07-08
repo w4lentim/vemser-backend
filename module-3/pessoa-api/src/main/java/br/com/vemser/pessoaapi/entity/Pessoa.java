@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class Pessoa {
 
     private Integer idPessoa;
-    @NotBlank (message = "O nome não pode ser nulo/vazio/conter somente espaços.")
+    @NotBlank(message = "O nome não pode ser nulo/vazio/conter somente espaços.")
     private String nome;
     @Past
     @NotNull
@@ -15,7 +15,8 @@ public class Pessoa {
     @Size(min = 11, max = 11, message = "O CPF deve conter 11 números.")
     private String cpf;
 
-    public Pessoa() {};
+    public Pessoa() {
+    }
 
     public Pessoa(Integer idPessoa, String nome, LocalDate dataNascimento, String cpf) {
         this.idPessoa = idPessoa;

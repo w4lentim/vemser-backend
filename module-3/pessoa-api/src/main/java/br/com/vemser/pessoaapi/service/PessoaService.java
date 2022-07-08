@@ -29,7 +29,7 @@ public class PessoaService {
         return pessoaRepository.update(verifyByIdPessoa(idPessoa), pessoaAtualizar);
     }
 
-    public void delete(Integer idPessoa) throws Exception {
+    public void delete(Integer idPessoa) throws RegraDeNegocioException {
         pessoaRepository.delete(verifyByIdPessoa(idPessoa));
     }
 

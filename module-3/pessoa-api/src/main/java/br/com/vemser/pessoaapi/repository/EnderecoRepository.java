@@ -1,6 +1,7 @@
 package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.entity.Endereco;
+import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class EnderecoRepository {
         return endereco;
     }
 
-    public Endereco update(Endereco enderecoRecuperado, Endereco enderecoAtualizar) throws Exception {
+    public Endereco update(Endereco enderecoRecuperado, Endereco enderecoAtualizar) throws RegraDeNegocioException {
         getDadosEndereco(enderecoRecuperado, enderecoAtualizar);
         return enderecoRecuperado;
     }
