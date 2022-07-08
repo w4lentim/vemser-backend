@@ -1,7 +1,6 @@
 package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.entity.Endereco;
-import br.com.vemser.pessoaapi.entity.Pessoa;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -22,16 +21,26 @@ public class EnderecoRepository {
         listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 5, "COMERCIAL", "Rua das Calçadas", 88, "E", "61948444", "Fortaleza", "Ceará", "Brasil"));
     }
 
+    public List<Endereco> list() {
+        return listaEndereco;
+    }
+
     public Endereco create(Endereco endereco) {
         endereco.setIdEndereco(COUNTER.incrementAndGet());
         listaEndereco.add(endereco);
         return endereco;
     }
 
-    public List<Endereco> list() {
-        return listaEndereco;
-    }
     public Endereco update(Endereco enderecoRecuperado, Endereco enderecoAtualizar) throws Exception {
+        getDadosEndereco(enderecoRecuperado, enderecoAtualizar);
+        return enderecoRecuperado;
+    }
+
+    public void delete(Endereco endereco) {
+        listaEndereco.remove(endereco);
+    }
+
+    private void getDadosEndereco(Endereco enderecoRecuperado, Endereco enderecoAtualizar) {
         enderecoRecuperado.setIdPessoa(enderecoAtualizar.getIdPessoa());
         enderecoRecuperado.setTipo(enderecoAtualizar.getTipo());
         enderecoRecuperado.setLogradouro(enderecoAtualizar.getLogradouro());
@@ -41,31 +50,5 @@ public class EnderecoRepository {
         enderecoRecuperado.setCidade(enderecoAtualizar.getCidade());
         enderecoRecuperado.setEstado(enderecoAtualizar.getEstado());
         enderecoRecuperado.setPais(enderecoAtualizar.getPais());
-
-        return enderecoRecuperado;
-    }
-
-    public void delete(Integer id) throws Exception {
-        Endereco enderecoRecuperado = listaEndereco.stream()
-                .filter(endereco -> endereco.getIdEndereco().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("O endereço não foi encontrado."));
-        listaEndereco.remove(enderecoRecuperado);
-    }
-
-    public List<Endereco> listEnderecoByIdPessoa(Integer id) {
-        return listaEndereco.stream()
-                .filter(endereco -> endereco.getIdPessoa().equals(id)).toList();
-    }
-
-    public Endereco listEnderecoByIdEndereco(Integer id) throws Exception {
-        try {
-            Endereco enderecoRecuperado = listaEndereco.stream()
-                    .filter(endereco -> endereco.getIdEndereco().equals(id))
-                    .findFirst().get();
-            return enderecoRecuperado;
-        } catch (Exception e) {
-            throw new Exception("Não foi possível encontrar o endereço!");
-        }
     }
 }

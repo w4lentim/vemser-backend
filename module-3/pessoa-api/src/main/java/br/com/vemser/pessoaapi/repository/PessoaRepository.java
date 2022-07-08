@@ -1,6 +1,7 @@
 package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.entity.Pessoa;
+import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -25,37 +26,28 @@ public class PessoaRepository {
         listaPessoas.add(new Pessoa(COUNTER.incrementAndGet() /*5*/, "Ana Clara", LocalDate.parse("10/07/1990", formatter), "11122233344"));
     }
 
+    public List<Pessoa> list() { return listaPessoas; }
+
+    public List<Pessoa> listByName(String nome) {
+        return listaPessoas.stream()
+                .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
+                .collect(Collectors.toList());
+    }
+
     public Pessoa create(Pessoa pessoa) {
         pessoa.setIdPessoa(COUNTER.incrementAndGet());
         listaPessoas.add(pessoa);
         return pessoa;
     }
 
-    public List<Pessoa> list() { return listaPessoas; }
-
-    public Pessoa update(Integer id, Pessoa pessoaAtualizar) throws Exception {
-        Pessoa pessoaRecuperada = listaPessoas.stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("A pessoa não foi encontrada."));
+    public Pessoa update(Pessoa pessoaRecuperada, Pessoa pessoaAtualizar) throws RegraDeNegocioException {
         pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());;
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
-
         return pessoaRecuperada;
     }
 
-    public void delete(Integer id) throws Exception {
-        Pessoa pessoaRecuperada = listaPessoas.stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("A pessoa não foi encontrada."));
-        listaPessoas.remove(pessoaRecuperada);
-    }
-
-    public List<Pessoa> listByName(String nome) {
-        return listaPessoas.stream()
-                .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
-                .collect(Collectors.toList());
+    public void delete(Pessoa pessoa) throws RegraDeNegocioException {
+        listaPessoas.remove(pessoa);
     }
 }

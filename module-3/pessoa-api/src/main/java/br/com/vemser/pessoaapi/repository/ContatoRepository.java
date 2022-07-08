@@ -1,12 +1,12 @@
 package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.entity.Contato;
+import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 @Repository
 public class ContatoRepository {
@@ -23,44 +23,29 @@ public class ContatoRepository {
         listaContatos.add(new Contato(COUNTER.incrementAndGet(), 5, "COMERCIAL", "8533336666", "Telegram"));
     }
 
+    public List<Contato> list() {
+        return listaContatos;
+    }
+
     public Contato create(Contato contato) {
         contato.setIdContato(COUNTER.incrementAndGet());
         listaContatos.add(contato);
         return contato;
     }
 
-    public Contato update(Contato contatoRecuperado, Contato contatoAtualizar) throws Exception {
+    public Contato update(Contato contatoRecuperado, Contato contatoAtualizar) throws RegraDeNegocioException {
+        getDadosContato(contatoRecuperado, contatoAtualizar);
+        return contatoRecuperado;
+    }
+
+    private void getDadosContato(Contato contatoRecuperado, Contato contatoAtualizar) {
         contatoRecuperado.setTipo(contatoAtualizar.getTipo());
         contatoRecuperado.setIdPessoa(contatoAtualizar.getIdPessoa());
         contatoRecuperado.setNumero(contatoAtualizar.getNumero());
         contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
-        return contatoRecuperado;
     }
 
-    public List<Contato> list() {
-        return listaContatos;
-    }
-
-    public void delete(Integer id) throws Exception {
-        Contato contatoRemover = contatoByIdContato(id);
-        listaContatos.remove(contatoRemover);
-    }
-
-    public Contato contatoByIdContato(Integer idContato) throws Exception {
-        try {
-            Contato contatoRecuperado = listaContatos.stream()
-                    .filter(contato -> contato.getIdContato().equals(idContato))
-                    .findFirst()
-                    .get();
-            return contatoRecuperado;
-        } catch (Exception e) {
-            throw new Exception();
-        }
-    }
-
-    public List<Contato> listById(Integer id) {
-        return listaContatos.stream()
-                .filter(contato -> contato.getIdPessoa().equals(id))
-                .toList();
+    public void delete(Contato contato) throws RegraDeNegocioException {
+        listaContatos.remove(contato);
     }
 }
