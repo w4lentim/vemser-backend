@@ -1,18 +1,20 @@
 package br.com.vemser.pessoaapi.entity;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Contato {
 
     private Integer idContato;
     private Integer idPessoa;
-    @NotBlank(message = "O tipo de contato não pode ser vazio/nulo/conter somente espaços.")
+    @NotNull (message = "O tipo de contato não pode ser nulo.")
     private String tipo;
-    @NotBlank(message = "Não é possível ter um número nulo/vazio/conter somente espaços.")
+    @NotEmpty (message = "O numero nao pode ser vazio/nulo.")
     @Size(max = 13)
     private String numero;
-    @NotBlank (message = "É necessário informar uma descrição para o telefone. Não é possível ter uma descrição vazia/nula/conter somente espaços!")
+    @NotEmpty (message = "A descriçao nao pode ser vazia/nula.")
     private String descricao;
 
     public Contato() {};

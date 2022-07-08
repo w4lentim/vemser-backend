@@ -7,22 +7,23 @@ public class Endereco {
     private Integer idEndereco;
 
     private Integer idPessoa;
-    @NotBlank(message = "O tipo de endereço deve ser RESIDENCIAL/COMERCIAL.")
+    @NotNull (message = "O tipo de endereço deve ser RESIDENCIAL/COMERCIAL.")
     private String tipo;
-    @NotBlank
-    @Size (max = 100, message = "Informe um logradouro válido, contendo até 100 caracteres.")
+    @NotEmpty
+    @Size (max = 250, message = "Informe um logradouro válido, contendo até 250 caracteres.")
     private String logradouro;
-    @NotNull(message = "O número da residência não pode ser nulo.")
+    @NotEmpty (message = "O número da residência não pode ser vazio/nulo.")
     private Integer numero;
     private String complemento;
-    @NotBlank(message = "Informe um CEP válido. O CEP não pode ser nulo/vazio/conter somente espaços.")
+    @NotEmpty (message = "O CEP não pode ser vazio/nulo.")
     @Size(min = 8, max = 8, message = "O CEP deve conter 8 números.")
     private String cep;
-    @NotBlank(message = "Informe uma cidade válida. A cidade não pode ser nula/vazia/conter somente espaços.")
+    @NotEmpty (message = "A cidade não pode ser nula/vazia.")
+    @Size (max = 250, message = "Informe uma cidade válida, contendo até 250 caracteres.")
     private String cidade;
-    @NotBlank(message = "Informe um estado válido. O estado não pode ser nulo/vazio/conter somente espaços.")
+    @NotNull (message = "O estado não pode ser nulo.")
     private String estado;
-    @NotBlank(message = "Informe um país válido. O país não pode ser nulo/vazio/conter somente espaços.")
+    @NotNull (message = "O país não pode ser nulo.")
     private String pais;
 
     public Endereco() {}

@@ -19,7 +19,6 @@ public class PessoaController {
 
     @Autowired
     private PessoaService pessoaService;
-
     @Autowired
     private PropertieReader propertieReader;
 
@@ -30,7 +29,7 @@ public class PessoaController {
         return propertieReader.getAmbiente();
     }
 
-    @GetMapping("/hello") // localhost:8080/pessoa/hello;
+    @GetMapping("/hello")
     public String hello() { return "Hello World!"; }
 
     @GetMapping
