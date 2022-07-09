@@ -1,15 +1,16 @@
-package br.com.vemser.pessoaapi.entity;
+package br.com.vemser.pessoaapi.dto;
+
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
-public class Contato {
-
-    private Integer idContato;
+@NoArgsConstructor
+@ToString
+public class ContatoCreateDTO {
 
     private Integer idPessoa;
 
@@ -22,5 +23,4 @@ public class Contato {
 
     @NotBlank(message = "A descriçao nao pode ser vazia/nula.")
     private String descricao;
-
 }

@@ -1,16 +1,19 @@
-package br.com.vemser.pessoaapi.entity;
+package br.com.vemser.pessoaapi.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
-public class Pessoa {
-
-    private Integer idPessoa;
+@NoArgsConstructor
+@ToString
+public class PessoaCreateDTO {
 
     @NotBlank(message = "O nome não pode ser nulo/vazio/conter somente espaços.")
     private String nome;

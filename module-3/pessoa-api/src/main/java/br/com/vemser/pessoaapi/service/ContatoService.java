@@ -1,14 +1,21 @@
 package br.com.vemser.pessoaapi.service;
 
+import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
+import br.com.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.vemser.pessoaapi.entity.Contato;
+import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.repository.ContatoRepository;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ContatoService {
 
     @Autowired
@@ -16,40 +23,57 @@ public class ContatoService {
     @Autowired
     private PessoaService pessoaService;
 
-    public List<Contato> list() {
-        return contatoRepository.list();
-    }
+    @Autowired
+    private ObjectMapper objectMapper;
 
-    public Contato create(Integer idPessoa, Contato contato) throws RegraDeNegocioException {
-        contato.setIdPessoa(pessoaService.verifyByIdPessoa(idPessoa).getIdPessoa());
-        return contatoRepository.create(contato);
-    }
-
-    public Contato update(Integer idContato, Contato contatoAtualizar) throws RegraDeNegocioException {
-        pessoaService.verifyByIdPessoa(contatoAtualizar.getIdPessoa());
-        try {
-            return contatoRepository.update(verifyByIdContato(idContato), contatoAtualizar);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    public List<ContatoDTO> list() {
+        List<ContatoDTO> contatosDTO = new ArrayList<>();
+        List<Contato> contatosEntity = contatoRepository.list();
+        for (Contato contato : contatosEntity) {
+            contatosDTO.add(objectMapper.convertValue(contato, ContatoDTO.class));
         }
+        return contatosDTO;
+    }
+
+    public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contato) throws RegraDeNegocioException {
+        Pessoa pessoa = pessoaService.verifyByIdPessoa(idPessoa);
+        log.info("Criando contato...");
+        contato.setIdPessoa(idPessoa);
+        // --- ENTRADA ---
+        Contato contatoEntity = objectMapper.convertValue(contato, Contato.class);
+        Contato contatoCriado = contatoRepository.create(contatoEntity);
+        // --- RETORNO ---
+        ContatoDTO contatoDTO = objectMapper.convertValue(contatoCriado, ContatoDTO.class);
+        log.info("Contato criado com sucesso!");
+        return contatoDTO;
+    }
+
+    public ContatoDTO update(Integer idContato, ContatoCreateDTO contatoAtualizar) throws RegraDeNegocioException {
+        Pessoa pessoa = pessoaService.verifyByIdPessoa(contatoAtualizar.getIdPessoa());
+        log.info("Atualizando os dados de contato " + pessoa.getNome());
+        // --- ENTRADA ---
+        Contato contatoEntity = objectMapper.convertValue(contatoAtualizar, Contato.class);
+        Contato contatoAtualizado = contatoRepository.update(verifyByIdContato(idContato), contatoEntity);
+        // --- RETORNO ---
+        ContatoDTO contatoDTO = objectMapper.convertValue(contatoAtualizado, ContatoDTO.class);
+        log.info("Dados do contato atualizados");
+        return contatoDTO;
     }
 
     public void delete(Integer idContato) throws RegraDeNegocioException {
-        try {
-            contatoRepository.delete(verifyByIdContato(idContato));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        log.info("Deletando contato...");
+        contatoRepository.delete(verifyByIdContato(idContato));
+        log.info("Contato deletado com sucesso!");
     }
 
     public Contato verifyByIdContato(Integer idContato) throws RegraDeNegocioException {
-        return list().stream()
+        return contatoRepository.list().stream()
                 .filter(contato -> contato.getIdContato().equals(idContato))
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("Não foi possível encontrar nenhum contato associado ao ID."));
     }
 
-    public List<Contato> listContatoByIdPessoa(Integer idPessoa) throws RegraDeNegocioException {
+    public List<ContatoDTO> listContatoByIdPessoa(Integer idPessoa) throws RegraDeNegocioException {
         return list().stream()
                 .filter(contato -> contato.getIdPessoa().equals(idPessoa)).toList();
     }
