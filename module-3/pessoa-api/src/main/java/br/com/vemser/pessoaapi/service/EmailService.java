@@ -1,6 +1,8 @@
 package br.com.vemser.pessoaapi.service;
 
+import br.com.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.vemser.pessoaapi.entity.Endereco;
 import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import freemarker.template.Template;
@@ -27,9 +29,6 @@ import java.util.Map;
 public class EmailService {
 
     private final freemarker.template.Configuration fnConfiguration;
-
-//    @Autowired
-//    private PessoaService pessoaService;
 
     @Value("${spring.mail.username}")
     private String from;
@@ -79,157 +78,89 @@ public class EmailService {
         }
     }
 
-    private void sendEmailCreatePessoa(PessoaDTO pessoaDTO) {
-        MimeMessage mimeMessage = emailSender.createMimeMessage();
-        try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-
-            mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setTo(pessoaDTO.getEmail());
-            mimeMessageHelper.setSubject("Seja muito bem vindo(a) ao nosso aplicativo!");
-            mimeMessageHelper.setText(getContentFromTemplateCreatePessoa(pessoaDTO), true);
-        } catch (MessagingException | IOException | TemplateException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String getContentFromTemplateCreatePessoa(PessoaDTO pessoaDTO) throws IOException, TemplateException {
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoaDTO.getNome());
-        dados.put("id", pessoaDTO.getIdPessoa());
-        dados.put("email", from);
-
-        Template template = fnConfiguration.getTemplate("emailCreatePessoa-template.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
-    private void sendEmailUpdatePessoa(PessoaDTO pessoaDTO) {
-        MimeMessage mimeMessage = emailSender.createMimeMessage();
-        try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-
-            mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setTo(pessoaDTO.getEmail());
-            mimeMessageHelper.setSubject("Notificação: Os seus dados estão sendo atualizado.");
-            mimeMessageHelper.setText(getContentFromTemplateUpdatePessoa(pessoaDTO), true);
-        } catch (MessagingException | IOException | TemplateException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String getContentFromTemplateUpdatePessoa(PessoaDTO pessoaDTO) throws IOException, TemplateException{
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoaDTO.getNome());
-        dados.put("email", from);
-
-        Template template = fnConfiguration.getTemplate("emailUpdatePessoa-template.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
-    private void sendEmailDeletePessoa(PessoaDTO pessoaDTO) {
-        MimeMessage mimeMessage = emailSender.createMimeMessage();
-        try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-
-            mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setTo(pessoaDTO.getEmail());
-            mimeMessageHelper.setSubject("Notificação: Os seus dados foram apagados do nosso aplicativo.");
-            mimeMessageHelper.setText(getContentFromTemplateDeletePessoa(pessoaDTO), true);
-        } catch (MessagingException | IOException | TemplateException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String getContentFromTemplateDeletePessoa(PessoaDTO pessoaDTO) throws IOException, TemplateException {
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoaDTO.getNome());
-        dados.put("email", from);
-
-        Template template = fnConfiguration.getTemplate("emailDeletePessoa-template.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
-    private void sendEmailCreateEndereco(PessoaDTO pessoaDTO) {
-        MimeMessage mimeMessage = emailSender.createMimeMessage();
-        try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-
-            mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setTo(pessoaDTO.getEmail());
-            mimeMessageHelper.setSubject("Notificação: Novo endereço adicionado com sucesso!");
-            mimeMessageHelper.setText(getContentFromTemplateCreatePessoa(pessoaDTO), true);
-        } catch (MessagingException | IOException | TemplateException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String getContentFromTemplateCreateEndereco(PessoaDTO pessoaDTO) throws IOException, TemplateException {
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoaDTO.getNome());
-        dados.put("email", from);
-
-        Template template = fnConfiguration.getTemplate("emailCreateEndereco-template.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
-    private void sendEmailUpdateEndereco(PessoaDTO pessoaDTO) {
-        MimeMessage mimeMessage = emailSender.createMimeMessage();
-        try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-
-            mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setTo(pessoaDTO.getEmail());
-            mimeMessageHelper.setSubject("Notificação: Os dados endereço estão sendo atualizado.");
-            mimeMessageHelper.setText(getContentFromTemplateUpdatePessoa(pessoaDTO), true);
-        } catch (MessagingException | IOException | TemplateException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String getContentFromTemplateUpdateEndereco(PessoaDTO pessoaDTO) throws IOException, TemplateException{
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoaDTO.getNome());
-        dados.put("email", from);
-
-        Template template = fnConfiguration.getTemplate("emailUpdateEndereco-template.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
-    private void sendEmailDeleteEndereco(PessoaDTO pessoaDTO) {
-        MimeMessage mimeMessage = emailSender.createMimeMessage();
-        try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-
-            mimeMessageHelper.setFrom(from);
-            mimeMessageHelper.setTo(pessoaDTO.getEmail());
-            mimeMessageHelper.setSubject("Notificação: Os seus dados de endereço foram apagados do nosso aplicativo.");
-            mimeMessageHelper.setText(getContentFromTemplateDeletePessoa(pessoaDTO), true);
-        } catch (MessagingException | IOException | TemplateException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String getContentFromTemplateDeleteEndereco(PessoaDTO pessoaDTO) throws IOException, TemplateException {
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoaDTO.getNome());
-        dados.put("email", from);
-
-        Template template = fnConfiguration.getTemplate("emailDeleteEndereco-template.ftl");
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
     public String getContentFromTemplate() throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
         dados.put("nome", "Meu nome");
         dados.put("email", "willian.valentim@dbccompany.com.br");
 
         Template template = fnConfiguration.getTemplate("email-template.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+    
+    private void sendEmailPessoa(PessoaDTO pessoaDTO, String tipo) throws RegraDeNegocioException {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(pessoaDTO.getEmail());
+            if ((tipo).equalsIgnoreCase("create")) {
+                mimeMessageHelper.setSubject("Seja bem vindo(a) ao nosso aplicativo!");
+            } else if ((tipo).equalsIgnoreCase("update")) {
+                mimeMessageHelper.setSubject("Seus dados foram atualizados em nosso sistema.");
+            } else if ((tipo).equalsIgnoreCase("delete")) {
+                mimeMessageHelper.setSubject("Seus dados foram apagados de nosso sistema!");
+            }
+            mimeMessageHelper.setText(getContentFromTemplatePessoa(pessoaDTO, tipo), true);
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException | IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getContentFromTemplatePessoa(PessoaDTO pessoaDTO, String tipo) throws IOException, TemplateException {
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", pessoaDTO.getNome());
+        dados.put("id", pessoaDTO.getIdPessoa());
+        dados.put("email", from);
+
+        Template template;
+        if ((tipo).equalsIgnoreCase("create")) {
+            template = fnConfiguration.getTemplate("emailCreatePessoa-template.ftl");
+        } else if ((tipo).equalsIgnoreCase("update")) {
+            template = fnConfiguration.getTemplate("emailUpdatePessoa-template.ftl");
+        } else {
+            template = fnConfiguration.getTemplate("emailDeletePessoa-template.ftl");
+        }
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+
+    public void sendEmailEndereco(PessoaDTO pessoaDTO, EnderecoDTO enderecoDTO, String tipo) throws RegraDeNegocioException {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        try {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper.setFrom(from);
+            mimeMessageHelper.setTo(pessoaDTO.getEmail());
+            if ((tipo).equalsIgnoreCase("create")) {
+                mimeMessageHelper.setSubject("Seu novo endereço foi adicionado!");
+            } else if ((tipo).equalsIgnoreCase("update")) {
+                mimeMessageHelper.setSubject("Seus dados de endereço foram atualizados!");
+            } else if ((tipo).equalsIgnoreCase("delete")) {
+                mimeMessageHelper.setSubject("Seus dados de endereço foram apagados de nosso sistema!");
+            }
+            mimeMessageHelper.setText(getContentFromTemplateEndereco(pessoaDTO, enderecoDTO, tipo), true);
+            emailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException | IOException | TemplateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getContentFromTemplateEndereco(PessoaDTO pessoaDTO, EnderecoDTO enderecoDTO, String tipo) throws IOException, TemplateException {
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", pessoaDTO.getNome());
+        dados.put("id", pessoaDTO.getIdPessoa());
+        dados.put("idEndereco", enderecoDTO.getIdEndereco());
+        dados.put("email", from);
+
+        Template template;
+        if ((tipo).equalsIgnoreCase("create")) {
+            template = fnConfiguration.getTemplate("emailCreateEndereco-template.ftl");
+        } else if ((tipo).equalsIgnoreCase("update")) {
+            template = fnConfiguration.getTemplate("emailUpdateEndereco-template.ftl");
+        } else {
+            template = fnConfiguration.getTemplate("emailDeleteEndereco-template.ftl");
+        }
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }
