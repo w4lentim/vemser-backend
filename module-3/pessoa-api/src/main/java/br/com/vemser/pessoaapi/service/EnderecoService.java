@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -23,15 +24,14 @@ public class EnderecoService {
     @Autowired
     private PessoaService pessoaService;
     @Autowired
+    private EmailService emailService;
+    @Autowired
     private ObjectMapper objectMapper;
 
     public List<EnderecoDTO> list() {
-        List<EnderecoDTO> enderecosDTO = new ArrayList<>();
-        List<Endereco> enderecos = enderecoRepository.list();
-        for (Endereco endereco : enderecos) {
-            enderecosDTO.add(objectMapper.convertValue(endereco, EnderecoDTO.class));
-        }
-        return enderecosDTO;
+        return enderecoRepository.list().stream()
+                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
+                .collect(Collectors.toList());
     }
 
     public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO endereco) throws RegraDeNegocioException {
@@ -69,6 +69,10 @@ public class EnderecoService {
     }
 
     public List<EnderecoDTO> listEnderecoByIdPessoa(Integer idPessoa) throws RegraDeNegocioException {
+//        return enderecoRepository.list().stream()
+//                .filter(endereco -> endereco.getIdPessoa().equals(idPessoa))
+//                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
+//                .collect(Collectors.toList());
         List<EnderecoDTO> enderecosDTO = new ArrayList<>();
         List<Endereco> enderecos = enderecoRepository.list().stream()
                 .filter(endereco -> endereco.getIdPessoa().equals(idPessoa)).toList();

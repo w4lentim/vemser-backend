@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -20,15 +21,14 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
     @Autowired
+    private EmailService emailService;
+    @Autowired
     private ObjectMapper objectMapper;
 
     public List<PessoaDTO> list() {
-        List<PessoaDTO> pessoasDTO = new ArrayList<>();
-        List<Pessoa> pessoasEntity = pessoaRepository.list();
-        for (Pessoa pessoa : pessoasEntity) {
-            pessoasDTO.add(objectMapper.convertValue(pessoa, PessoaDTO.class));
-        }
-        return pessoasDTO;
+        return pessoaRepository.list().stream()
+                .map(pessoa -> objectMapper.convertValue(pessoa, PessoaDTO.class))
+                .collect(Collectors.toList());
     }
 
     public List<PessoaDTO> listByName(String nome) {

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -22,17 +23,13 @@ public class ContatoService {
     private ContatoRepository contatoRepository;
     @Autowired
     private PessoaService pessoaService;
-
     @Autowired
     private ObjectMapper objectMapper;
 
     public List<ContatoDTO> list() {
-        List<ContatoDTO> contatosDTO = new ArrayList<>();
-        List<Contato> contatosEntity = contatoRepository.list();
-        for (Contato contato : contatosEntity) {
-            contatosDTO.add(objectMapper.convertValue(contato, ContatoDTO.class));
-        }
-        return contatosDTO;
+        return contatoRepository.list().stream()
+                .map(contato -> objectMapper.convertValue(contato, ContatoDTO.class))
+                .collect(Collectors.toList());
     }
 
     public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contato) throws RegraDeNegocioException {
@@ -77,4 +74,6 @@ public class ContatoService {
         return list().stream()
                 .filter(contato -> contato.getIdPessoa().equals(idPessoa)).toList();
     }
+
+    public void emailBemVindo() {}
 }

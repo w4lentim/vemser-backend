@@ -2,9 +2,9 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
-import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.config.PropertieReader;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
+import br.com.vemser.pessoaapi.service.EmailService;
 import br.com.vemser.pessoaapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +23,8 @@ public class PessoaController {
     private PessoaService pessoaService;
     @Autowired
     private PropertieReader propertieReader;
+    @Autowired
+    private EmailService emailService;
 
     public PessoaController() {}
 
@@ -33,6 +35,12 @@ public class PessoaController {
 
     @GetMapping("/hello")
     public String hello() { return "Hello World!"; }
+
+    @GetMapping("/email")
+    public String email() {
+        emailService.sendEmail();
+        return "Enviando email...";
+    }
 
     @GetMapping
     public List<PessoaDTO> list() { return pessoaService.list(); }
