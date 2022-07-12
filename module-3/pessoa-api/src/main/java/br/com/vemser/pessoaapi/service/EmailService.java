@@ -87,8 +87,8 @@ public class EmailService {
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }
-    
-    private void sendEmailPessoa(PessoaDTO pessoaDTO, String tipo) throws RegraDeNegocioException {
+
+    public void sendEmailPessoa(PessoaDTO pessoaDTO, String tipo) {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
@@ -97,9 +97,9 @@ public class EmailService {
             if ((tipo).equalsIgnoreCase("create")) {
                 mimeMessageHelper.setSubject("Seja bem vindo(a) ao nosso aplicativo!");
             } else if ((tipo).equalsIgnoreCase("update")) {
-                mimeMessageHelper.setSubject("Seus dados foram atualizados em nosso sistema.");
+                mimeMessageHelper.setSubject("Seus dados foram atualizados com sucesso!");
             } else if ((tipo).equalsIgnoreCase("delete")) {
-                mimeMessageHelper.setSubject("Seus dados foram apagados de nosso sistema!");
+                mimeMessageHelper.setSubject("Seus dados foram apagados do nosso sistema!");
             }
             mimeMessageHelper.setText(getContentFromTemplatePessoa(pessoaDTO, tipo), true);
             emailSender.send(mimeMessageHelper.getMimeMessage());
@@ -126,7 +126,7 @@ public class EmailService {
         return html;
     }
 
-    public void sendEmailEndereco(PessoaDTO pessoaDTO, EnderecoDTO enderecoDTO, String tipo) throws RegraDeNegocioException {
+    public void sendEmailEndereco(PessoaDTO pessoaDTO, EnderecoDTO enderecoDTO, String tipo) {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
