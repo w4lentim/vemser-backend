@@ -24,12 +24,12 @@ public class ContatoController {
     @Autowired
     private ContatoService contatoService;
 
-    @Operation(summary = "Listar contatos", description = "Listar todos os contatos do banco")
+    @Operation(summary = "Listar contatos", description = "Listará todos os contatos contidos no banco de dados")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna a lista de contatos com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Você não possui permissão para acessar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+                    @ApiResponse(responseCode = "200", description = "Sucesso! Todos os contatos foram listados com sucesso"),
+                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução foi gerada uma exceção")
             }
     )
     @GetMapping
@@ -37,12 +37,12 @@ public class ContatoController {
         return new ResponseEntity<>(contatoService.list(), HttpStatus.OK);
     }
 
-    @Operation(summary = "Listar contato pelo ID", description = "Listar todos os contatos associados ao ID da pessoa")
+    @Operation(summary = "Listar contato pelo ID da pessoa", description = "Listará todos os contatos associados ao ID da pessoa")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna a lista de endereços associados a pessoa com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Você não possui permissão para acessar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+                    @ApiResponse(responseCode = "200", description = "Sucesso! Os endereços associados a pessoa foram listados com sucesso"),
+                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução foi gerada uma exceção")
             }
     )
     @GetMapping("/{idPessoa}")
@@ -50,12 +50,12 @@ public class ContatoController {
         return new ResponseEntity<>(contatoService.listContatoByIdPessoa(idPessoa), HttpStatus.OK);
     }
 
-    @Operation(summary = "Adicionar um contato a pessoa", description = "Adiciona um novo contato a pessoa")
+    @Operation(summary = "Adicionar um contato a uma pessoa", description = "Adicionará um novo contato a uma pessoa do banco de dados")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Contato adicionado a pessoa com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Você não possui permissão para acessar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+                    @ApiResponse(responseCode = "200", description = "Sucesso! O contato foi adicionado a pessoa com sucesso"),
+                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução foi gerada uma exceção")
             }
     )
     @PostMapping("/{idPessoa}")
@@ -63,12 +63,12 @@ public class ContatoController {
         return new ResponseEntity<>(contatoService.create(idPessoa, contato), HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Atualizar contato", description = "Atualiza um contato do banco de dados")
+    @Operation(summary = "Atualizar contato", description = "Atualizará os dados do contato no banco de dados")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Contato atualizado com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Você não possui permissão para acessar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+                    @ApiResponse(responseCode = "200", description = "Sucesso! O dados do contato foram atualizados com sucesso"),
+                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução foi gerada uma exceção")
             }
     )
     @PutMapping("/{idContato}")
@@ -76,12 +76,12 @@ public class ContatoController {
         return new ResponseEntity<>(contatoService.update(idContato, contatoAtualizar), HttpStatus.ACCEPTED);
     }
 
-    @Operation(summary = "Deletar contato", description = "Deleta um contato do banco de dados")
+    @Operation(summary = "Deletar contato", description = "Deletará todos os dados de um contato no banco de dados")
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Contato removido do banco de dados com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Você não possui permissão para acessar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+                    @ApiResponse(responseCode = "200", description = "Sucesso! O dados do contato foram removidos do banco de dados com sucesso"),
+                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução foi gerada uma exceção")
             }
     )
     @DeleteMapping("/{idContato}")

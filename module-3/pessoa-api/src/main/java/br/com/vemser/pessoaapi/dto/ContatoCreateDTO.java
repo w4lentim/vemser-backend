@@ -13,10 +13,11 @@ import javax.validation.constraints.Size;
 @ToString
 public class ContatoCreateDTO {
 
+    @Schema(description = "Identificador (ID) da pessoa que o contato está associado.")
     private Integer idPessoa;
 
     @NotBlank(message = "O tipo de contato não pode ser nulo.")
-    @Schema(description = "Tipo de contato")
+    @Schema(description = "Tipo de contato (COMERCIAL/RESIDENCIAL)")
     private String tipo;
 
     @NotBlank(message = "O numero nao pode ser vazio/nulo.")

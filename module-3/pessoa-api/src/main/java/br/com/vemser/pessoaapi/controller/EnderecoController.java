@@ -26,12 +26,12 @@ public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
 
-    @Operation(summary = "Listar endereços", description = "Listara todos os endereços do banco de dados")
+    @Operation(summary = "Listar endereços", description = "Listará todos os endereços do banco de dados")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Sucesso! Todos endereços foram listados com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Permissao negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execuçao, foi gerada uma exceção")
+                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução, foi gerada uma exceção")
             }
     )
     @GetMapping
@@ -39,12 +39,12 @@ public class EnderecoController {
         return new ResponseEntity<>(enderecoService.list(), HttpStatus.OK);
     }
 
-    @Operation(summary = "Listar endereço pelo ID", description = "Listara um endereço do banco de acordo com o ID")
+    @Operation(summary = "Listar endereço pelo ID", description = "Listará um endereço do banco de acordo com o ID")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Sucesso! O endereço referente ao ID foi listado com sucesso"),
                     @ApiResponse(responseCode = "403", description = "Permissao negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execuçao, foi gerada uma exceção")
+                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução, foi gerada uma exceção")
             }
     )
     @GetMapping("/{idEndereco}")
@@ -52,7 +52,7 @@ public class EnderecoController {
         return new ResponseEntity<>(enderecoService.listEnderecoByIdEndereco(idEndereco), HttpStatus.OK);
     }
 
-    @Operation(summary = "Listar endereços da pessoa", description = "Listara os endereços associados a pessoa")
+    @Operation(summary = "Listar endereços da pessoa", description = "Listará os endereços associados a pessoa")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Sucesso! Os endereços associados a pessoa informada foram listados com sucesso"),
@@ -65,7 +65,7 @@ public class EnderecoController {
         return new ResponseEntity<>(enderecoService.listEnderecoByIdPessoa(idPessoa), HttpStatus.OK);
     }
 
-    @Operation(summary = "Adicionar um endereço a pessoa", description = "Adicionara um novo endereço a uma pessoa do banco de dados")
+    @Operation(summary = "Adicionar um endereço a pessoa", description = "Adicionará um novo endereço a uma pessoa do banco de dados")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Sucesso! O endereço foi adicionado a pessoa com sucesso"),
@@ -78,7 +78,7 @@ public class EnderecoController {
         return new ResponseEntity<>(enderecoService.create(idPessoa, endereco), HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Atualizar endereço", description = "Atualizara todos os dados de um endereço de acordo com ID informado")
+    @Operation(summary = "Atualizar endereço", description = "Atualizará todos os dados de um endereço de acordo com ID informado")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Sucesso! Os dados do endereço foram atualizados com sucesso"),
