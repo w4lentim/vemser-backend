@@ -9,7 +9,7 @@ public class Endereco {
 
     private Integer idEndereco;
     private Integer idPessoa;
-    private String tipo;
+    private TipoDeEndereco tipo;
     private String logradouro;
     private Integer numero;
     private String complemento;

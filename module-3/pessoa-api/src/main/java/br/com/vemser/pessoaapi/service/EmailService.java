@@ -4,6 +4,7 @@ import br.com.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.Endereco;
 import br.com.vemser.pessoaapi.entity.Pessoa;
+import br.com.vemser.pessoaapi.entity.TipoDeMensagem;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -94,11 +95,11 @@ public class EmailService {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
             mimeMessageHelper.setFrom(from);
             mimeMessageHelper.setTo(pessoaDTO.getEmail());
-            if ((tipo).equalsIgnoreCase("create")) {
+            if (tipo.equals(TipoDeMensagem.CREATE.getTipo())) {
                 mimeMessageHelper.setSubject("Seja bem vindo(a) ao nosso aplicativo!");
-            } else if ((tipo).equalsIgnoreCase("update")) {
+            } else if (tipo.equals(TipoDeMensagem.UPDATE.getTipo())) {
                 mimeMessageHelper.setSubject("Seus dados foram atualizados com sucesso!");
-            } else if ((tipo).equalsIgnoreCase("delete")) {
+            } else if (tipo.equals(TipoDeMensagem.DELETE.getTipo())) {
                 mimeMessageHelper.setSubject("Seus dados foram apagados do nosso sistema!");
             }
             mimeMessageHelper.setText(getContentFromTemplatePessoa(pessoaDTO, tipo), true);
@@ -115,9 +116,9 @@ public class EmailService {
         dados.put("email", from);
 
         Template template;
-        if ((tipo).equalsIgnoreCase("create")) {
+        if (tipo.equals(TipoDeMensagem.CREATE.getTipo())) {
             template = fnConfiguration.getTemplate("emailCreatePessoa-template.ftl");
-        } else if ((tipo).equalsIgnoreCase("update")) {
+        } else if (tipo.equals(TipoDeMensagem.UPDATE.getTipo())) {
             template = fnConfiguration.getTemplate("emailUpdatePessoa-template.ftl");
         } else {
             template = fnConfiguration.getTemplate("emailDeletePessoa-template.ftl");
@@ -132,11 +133,11 @@ public class EmailService {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
             mimeMessageHelper.setFrom(from);
             mimeMessageHelper.setTo(pessoaDTO.getEmail());
-            if ((tipo).equalsIgnoreCase("create")) {
+            if (tipo.equals(TipoDeMensagem.CREATE.getTipo())) {
                 mimeMessageHelper.setSubject("Seu novo endereço foi adicionado!");
-            } else if ((tipo).equalsIgnoreCase("update")) {
+            } else if (tipo.equals(TipoDeMensagem.UPDATE.getTipo())) {
                 mimeMessageHelper.setSubject("Seus dados de endereço foram atualizados!");
-            } else if ((tipo).equalsIgnoreCase("delete")) {
+            } else if (tipo.equals(TipoDeMensagem.DELETE.getTipo())) {
                 mimeMessageHelper.setSubject("Seus dados de endereço foram apagados de nosso sistema!");
             }
             mimeMessageHelper.setText(getContentFromTemplateEndereco(pessoaDTO, enderecoDTO, tipo), true);
@@ -154,9 +155,9 @@ public class EmailService {
         dados.put("email", from);
 
         Template template;
-        if ((tipo).equalsIgnoreCase("create")) {
+        if (tipo.equals(TipoDeMensagem.CREATE.getTipo())) {
             template = fnConfiguration.getTemplate("emailCreateEndereco-template.ftl");
-        } else if ((tipo).equalsIgnoreCase("update")) {
+        } else if (tipo.equals(TipoDeMensagem.UPDATE.getTipo())) {
             template = fnConfiguration.getTemplate("emailUpdateEndereco-template.ftl");
         } else {
             template = fnConfiguration.getTemplate("emailDeleteEndereco-template.ftl");

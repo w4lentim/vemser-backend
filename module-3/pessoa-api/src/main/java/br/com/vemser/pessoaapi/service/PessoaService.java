@@ -3,6 +3,7 @@ package br.com.vemser.pessoaapi.service;
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.Pessoa;
+import br.com.vemser.pessoaapi.entity.TipoDeMensagem;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.PessoaRepository;
 // ---------- Import's Fasterxml ---------;
@@ -49,7 +50,7 @@ public class PessoaService {
         Pessoa pessoaCriada = pessoaRepository.create(pessoaEntity);
         // --- RETORNO ---
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaCriada, PessoaDTO.class);
-        String tipo = "create";
+        String tipo = TipoDeMensagem.CREATE.getTipo();
         emailService.sendEmailPessoa(pessoaDTO, tipo);
         log.info("Pessoa " + pessoaDTO.getNome() + " criada com sucesso!");
         return pessoaDTO;
@@ -57,12 +58,10 @@ public class PessoaService {
 
     public PessoaDTO update(Integer idPessoa, PessoaCreateDTO pessoaAtualizar) throws RegraDeNegocioException {
         log.info("Atualizando pessoa...");
-        // --- ENTRADA ---
-        Pessoa pessoaEntity = objectMapper.convertValue(pessoaAtualizar, Pessoa.class);
+        Pessoa pessoaEntity = convertPessoaToEntity(pessoaAtualizar);
         Pessoa pessoaAtualizada = pessoaRepository.update(verifyByIdPessoa(idPessoa), pessoaEntity);
-        // --- RETORNO ---
-        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaAtualizada, PessoaDTO.class);
-        String tipo = "update";
+        PessoaDTO pessoaDTO = convertPessoaToDTO(pessoaAtualizada);
+        String tipo = TipoDeMensagem.UPDATE.getTipo();
         emailService.sendEmailPessoa(pessoaDTO, tipo);
         log.info("Dados atualizados da pessoa: " + pessoaAtualizada);
         return pessoaDTO;
@@ -73,8 +72,8 @@ public class PessoaService {
         Pessoa pessoaVerify = verifyByIdPessoa(idPessoa);
         pessoaRepository.list().remove(pessoaVerify);
         log.info("Pessoa " + pessoaVerify.getNome() + " foi removida com sucesso!");
-        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaVerify, PessoaDTO.class);
-        String tipo = "delete";
+        PessoaDTO pessoaDTO = convertPessoaToDTO(pessoaVerify);
+        String tipo = TipoDeMensagem.DELETE.getTipo();
         emailService.sendEmailPessoa(pessoaDTO, tipo);
     }
 
@@ -83,5 +82,13 @@ public class PessoaService {
                 .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("Não foi encontrado nenhuma pessoa associada ao ID."));
+    }
+
+    public Pessoa convertPessoaToEntity(PessoaCreateDTO pessoaDTO) {
+        return objectMapper.convertValue(pessoaDTO, Pessoa.class);
+    }
+
+    public PessoaDTO convertPessoaToDTO(Pessoa pessoa) {
+        return objectMapper.convertValue(pessoa, PessoaDTO.class);
     }
 }

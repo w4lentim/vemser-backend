@@ -5,6 +5,7 @@ import br.com.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.Endereco;
 import br.com.vemser.pessoaapi.entity.Pessoa;
+import br.com.vemser.pessoaapi.entity.TipoDeMensagem;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.EnderecoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,30 +45,26 @@ public class EnderecoService {
     public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO endereco) throws RegraDeNegocioException {
         Pessoa pessoa = pessoaService.verifyByIdPessoa(idPessoa);
         log.info("Criando um endereço para a pessoa: " + pessoa.getNome());
-        endereco.setIdPessoa(idPessoa);
-        // --- ENTRADA ---
-        Endereco enderecoEntity = objectMapper.convertValue(endereco, Endereco.class);
-        Endereco enderecoCriado = enderecoRepository.create(enderecoEntity);
-        // --- RETORNO ---
-        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoCriado, EnderecoDTO.class);
-        String tipo = "create";
-        emailService.sendEmailEndereco(objectMapper.convertValue(pessoa, PessoaDTO.class), enderecoDTO, tipo);
+        Endereco enderecoEntity = convertEnderecoToEntity(endereco);
+        enderecoEntity.setIdPessoa(idPessoa);
+        enderecoRepository.create(enderecoEntity);
+        EnderecoDTO enderecoDTO = convertEnderecoToDTO(enderecoEntity);
+        String tipo = TipoDeMensagem.CREATE.getTipo();
+        emailService.sendEmailEndereco(pessoaService.convertPessoaToDTO(pessoa), enderecoDTO, tipo);
         log.info("Endereço adicionado com sucesso!");
         return enderecoDTO;
     }
 
     public EnderecoDTO update(Integer idEndereco, EnderecoCreateDTO enderecoAtualizar) throws RegraDeNegocioException {
         log.info("Atualizando endereço...");
+        Endereco enderecoEntity = convertEnderecoToEntity(enderecoAtualizar);
         Endereco enderecoRecuperado = verifyEnderecoById(idEndereco);
-        // --- ENTRADA ---
-        Endereco enderecoEntity = objectMapper.convertValue(enderecoAtualizar, Endereco.class);
         Pessoa pessoaRecuperada = pessoaService.verifyByIdPessoa(enderecoEntity.getIdPessoa());
         getDadosEndereco(enderecoRecuperado, enderecoEntity);
         log.info("Endereco atualizado com sucesso!");
-        // --- RETORNO ---
-        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRecuperado, EnderecoDTO.class);
-        String tipo = "update";
-        emailService.sendEmailEndereco(objectMapper.convertValue(pessoaRecuperada, PessoaDTO.class), enderecoDTO, tipo);
+        EnderecoDTO enderecoDTO = convertEnderecoToDTO(enderecoRecuperado);
+        String tipo = TipoDeMensagem.UPDATE.getTipo();
+        emailService.sendEmailEndereco(pessoaService.convertPessoaToDTO(pessoaRecuperada), enderecoDTO, tipo);
         return enderecoDTO;
     }
 
@@ -77,8 +74,8 @@ public class EnderecoService {
         Pessoa pessoaRecuperada = pessoaService.verifyByIdPessoa(enderecoRecuperado.getIdPessoa());
         enderecoRepository.list().remove(enderecoRecuperado);
         log.info("Endereço deletado com sucesso!");
-        String tipo = "delete";
-        emailService.sendEmailEndereco(objectMapper.convertValue(pessoaRecuperada, PessoaDTO.class), objectMapper.convertValue(enderecoRecuperado, EnderecoDTO.class), tipo);
+        String tipo = TipoDeMensagem.DELETE.getTipo();
+        emailService.sendEmailEndereco(pessoaService.convertPessoaToDTO(pessoaRecuperada), convertEnderecoToDTO(enderecoRecuperado), tipo);
     }
 
     public Endereco verifyEnderecoById(Integer idEndereco) throws RegraDeNegocioException {
@@ -93,6 +90,14 @@ public class EnderecoService {
                 .filter(endereco -> endereco.getIdPessoa().equals(idPessoa))
                 .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    public Endereco convertEnderecoToEntity(EnderecoCreateDTO enderecoDTO) {
+        return objectMapper.convertValue(enderecoDTO, Endereco.class);
+    }
+
+    public EnderecoDTO convertEnderecoToDTO(Endereco endereco) {
+        return objectMapper.convertValue(endereco, EnderecoDTO.class);
     }
 
     private void getDadosEndereco(Endereco enderecoRecuperado, Endereco enderecoEntity) {

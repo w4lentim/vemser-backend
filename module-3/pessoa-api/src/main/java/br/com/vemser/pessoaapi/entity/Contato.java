@@ -8,7 +8,7 @@ public class Contato {
 
     private Integer idContato;
     private Integer idPessoa;
-    private String tipo;
+    private TipoDeContato tipo;
     private String numero;
     private String descricao;
 

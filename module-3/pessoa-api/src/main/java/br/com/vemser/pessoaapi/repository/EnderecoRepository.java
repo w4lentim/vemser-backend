@@ -1,6 +1,7 @@
 package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.entity.Endereco;
+import br.com.vemser.pessoaapi.entity.TipoDeEndereco;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
 
@@ -15,11 +16,11 @@ public class EnderecoRepository {
     private AtomicInteger COUNTER = new AtomicInteger();
 
     public EnderecoRepository() {
-        listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 1, "COMERCIAL", "Rua das Pedras", 44, "A", "61948000", "Fortaleza", "Ceará", "Brasil"));
-        listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 2, "RESIDENCIAL", "Rua das Flores", 55, "B", "61948111", "Fortaleza", "Ceará", "Brasil"));
-        listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 3, "COMERCIAL", "Rua dos Carros", 66, "C", "61948222", "Fortaleza", "Ceará", "Brasil"));
-        listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 4, "RESIDENCIAL", "Rua das Árvores", 77, "D", "61948333", "Fortaleza", "Ceará", "Brasil"));
-        listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 5, "COMERCIAL", "Rua das Calçadas", 88, "E", "61948444", "Fortaleza", "Ceará", "Brasil"));
+        listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 1, TipoDeEndereco.COMERCIAL, "Rua das Pedras", 44, "A", "61948000", "Fortaleza", "Ceará", "Brasil"));
+        listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 2, TipoDeEndereco.RESIDENCIAL, "Rua das Flores", 55, "B", "61948111", "Fortaleza", "Ceará", "Brasil"));
+        listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 3, TipoDeEndereco.COMERCIAL, "Rua dos Carros", 66, "C", "61948222", "Fortaleza", "Ceará", "Brasil"));
+        listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 4, TipoDeEndereco.RESIDENCIAL, "Rua das Árvores", 77, "D", "61948333", "Fortaleza", "Ceará", "Brasil"));
+        listaEndereco.add(new Endereco(COUNTER.incrementAndGet(), 5, TipoDeEndereco.COMERCIAL, "Rua das Calçadas", 88, "E", "61948444", "Fortaleza", "Ceará", "Brasil"));
     }
 
     public List<Endereco> list() {

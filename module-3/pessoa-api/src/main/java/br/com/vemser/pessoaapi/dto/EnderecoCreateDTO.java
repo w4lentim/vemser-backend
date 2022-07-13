@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.dto;
 
+import br.com.vemser.pessoaapi.entity.TipoDeEndereco;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -19,7 +20,7 @@ public class EnderecoCreateDTO {
 
     @NotNull(message = "O tipo de endereço deve ser RESIDENCIAL/COMERCIAL.")
     @Schema(description = "Tipo de endereço")
-    private String tipo;
+    private TipoDeEndereco tipo;
 
     @NotEmpty
     @Size(max = 250, message = "Informe um logradouro válido, contendo até 250 caracteres.")

@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.dto;
 
+import br.com.vemser.pessoaapi.entity.TipoDeContato;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -18,7 +19,7 @@ public class ContatoCreateDTO {
 
     @NotBlank(message = "O tipo de contato não pode ser nulo.")
     @Schema(description = "Tipo de contato (COMERCIAL/RESIDENCIAL)")
-    private String tipo;
+    private TipoDeContato tipo;
 
     @NotBlank(message = "O numero nao pode ser vazio/nulo.")
     @Size(max = 13)
