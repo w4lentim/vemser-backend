@@ -13,16 +13,16 @@ import java.util.List;
 public interface DadosPessoaisClient {
 
     @RequestLine("GET /dados-pessoais")
-    List<DadosPessoaisDTO> listAll();
+    List<DadosPessoaisDTO> getAll();
 
     @RequestLine("GET /dados-pessoais/{cpf}")
-    DadosPessoaisDTO list(@Param("cpf") String cpf);
+    DadosPessoaisDTO get(@Param("cpf") String cpf);
 
     @RequestLine("POST /dados-pessoais")
-    DadosPessoaisDTO create(DadosPessoaisDTO dadosPessoaisDTO);
+    DadosPessoaisDTO post(DadosPessoaisDTO dadosPessoaisDTO);
 
     @RequestLine("PUT /dados-pessoais/{cpf}")
-    DadosPessoaisDTO update(@Param("cpf") String cpf, DadosPessoaisDTO dadosPessoaisDTO);
+    DadosPessoaisDTO put(@Param("cpf") String cpf, DadosPessoaisDTO dadosPessoaisDTO);
 
     @RequestLine("DELETE /dados-pessoais/{cpf}")
     void delete(@Param("cpf") String cpf);

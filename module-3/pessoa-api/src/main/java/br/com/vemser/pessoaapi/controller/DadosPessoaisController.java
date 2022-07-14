@@ -18,23 +18,23 @@ public class DadosPessoaisController {
     private DadosPessoaisService dadosPessoaisService;
 
     @GetMapping
-    public ResponseEntity<List<DadosPessoaisDTO>> listAll() {
-        return new ResponseEntity<>(dadosPessoaisService.listAll(), HttpStatus.OK);
+    public ResponseEntity<List<DadosPessoaisDTO>> getAll() {
+        return new ResponseEntity<>(dadosPessoaisService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{cpf}")
-    public ResponseEntity<DadosPessoaisDTO> list(@PathVariable("cpf") String cpf) {
-        return new ResponseEntity<>(dadosPessoaisService.list(cpf), HttpStatus.OK);
+    public ResponseEntity<DadosPessoaisDTO> get(@PathVariable("cpf") String cpf) {
+        return new ResponseEntity<>(dadosPessoaisService.get(cpf), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<DadosPessoaisDTO> create(@RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
-        return new ResponseEntity<>(dadosPessoaisService.create(dadosPessoaisDTO), HttpStatus.CREATED);
+    public ResponseEntity<DadosPessoaisDTO> post(@RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
+        return new ResponseEntity<>(dadosPessoaisService.post(dadosPessoaisDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{cpf}")
-    public ResponseEntity<DadosPessoaisDTO> update(@PathVariable("cpf") String cpf, @RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
-        return new ResponseEntity<>(dadosPessoaisService.update(cpf, dadosPessoaisDTO), HttpStatus.OK);
+    public ResponseEntity<DadosPessoaisDTO> put(@PathVariable("cpf") String cpf, @RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
+        return new ResponseEntity<>(dadosPessoaisService.put(cpf, dadosPessoaisDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{cpf}")
