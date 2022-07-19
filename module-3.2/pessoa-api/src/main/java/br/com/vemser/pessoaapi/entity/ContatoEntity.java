@@ -1,4 +1,5 @@
 package br.com.vemser.pessoaapi.entity;
+
 import br.com.vemser.pessoaapi.enums.TipoDeContato;
 import lombok.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class ContatoEntity {
 
     @Id
@@ -27,5 +29,4 @@ public class ContatoEntity {
 
     @Column(name = "DESCRICAO")
     private String descricao;
-
 }

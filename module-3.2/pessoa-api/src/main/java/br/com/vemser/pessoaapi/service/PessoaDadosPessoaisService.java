@@ -1,7 +1,7 @@
 package br.com.vemser.pessoaapi.service;
 
 import br.com.vemser.pessoaapi.dto.*;
-import br.com.vemser.pessoaapi.entity.Pessoa;
+import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,11 +76,11 @@ public class PessoaDadosPessoaisService {
     }
 
     public void delete(Integer idPessoa) throws RegraDeNegocioException {
-        Pessoa pessoa = pessoaService.verifyByIdPessoa(idPessoa);
+        PessoaEntity pessoaEntity = pessoaService.listByIdPessoa(idPessoa);
         pessoaService.delete(idPessoa);
         if (dadosPessoaisService.getAll().stream()
-                .anyMatch(dadosPessoaisDTO -> dadosPessoaisDTO.getCpf().equals(pessoa.getCpf()))) {
-            dadosPessoaisService.delete(pessoa.getCpf());
+                .anyMatch(dadosPessoaisDTO -> dadosPessoaisDTO.getCpf().equals(pessoaEntity.getCpf()))) {
+            dadosPessoaisService.delete(pessoaEntity.getCpf());
         }
     }
 

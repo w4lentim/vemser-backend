@@ -4,7 +4,7 @@ import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
-import br.com.vemser.pessoaapi.repository.ContatoRepository;
+import br.com.vemser.pessoaapi.dto.repository.ContatoRepository;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package br.com.vemser.pessoaapi.repository;
+package br.com.vemser.pessoaapi.dto.repository;
 
 import br.com.vemser.pessoaapi.entity.ContatoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

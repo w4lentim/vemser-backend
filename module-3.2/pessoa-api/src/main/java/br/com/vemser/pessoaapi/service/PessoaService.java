@@ -5,7 +5,7 @@ import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.enums.TipoDeMensagem;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
-import br.com.vemser.pessoaapi.repository.PessoaRepository;
+import br.com.vemser.pessoaapi.dto.repository.PessoaRepository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

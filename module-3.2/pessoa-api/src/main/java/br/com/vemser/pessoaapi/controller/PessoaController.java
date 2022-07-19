@@ -31,20 +31,6 @@ public class PessoaController {
 
     public PessoaController() {}
 
-    @Operation(summary = "Enviar e-mail", description = "Enviar um e-mail para a pessoa")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "E-mail enviado para a pessoa com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Você não possui permissão para acessar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
-            }
-    )
-    @GetMapping("/email")
-    public String email() {
-        emailService.sendEmail();
-        return "Enviando email...";
-    }
-
     @Operation(summary = "Listar pessoas", description = "Realizará a listagem de todas as pessoas cadastradas no banco de dados")
     @ApiResponses(
             value = {
