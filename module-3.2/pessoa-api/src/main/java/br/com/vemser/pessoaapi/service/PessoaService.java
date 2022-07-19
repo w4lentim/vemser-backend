@@ -5,7 +5,7 @@ import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.enums.TipoDeMensagem;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
-import br.com.vemser.pessoaapi.dto.repository.PessoaRepository;
+import br.com.vemser.pessoaapi.repository.PessoaRepository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,7 +27,7 @@ public class PessoaService {
                 .stream()
                 .map(this::convertPessoaToDTO).toList();
     }
-    public List<PessoaDTO> listByName(String nome) {
+    public List<PessoaDTO> findByNome(String nome) {
         return pessoaRepository.findAll()
                 .stream()
                 .filter(pessoa -> pessoa.getNome().toLowerCase().contains(nome.toLowerCase()))

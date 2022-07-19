@@ -1,6 +1,6 @@
 package br.com.vemser.pessoaapi.service;
 
-import br.com.vemser.pessoaapi.dto.repository.ProfessorRepository;
+import br.com.vemser.pessoaapi.repository.ProfessorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

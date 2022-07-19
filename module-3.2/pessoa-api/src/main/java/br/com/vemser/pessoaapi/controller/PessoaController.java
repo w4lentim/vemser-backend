@@ -2,7 +2,9 @@ package br.com.vemser.pessoaapi.controller;
 // ----------- Import's Classes ------------;
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
+import br.com.vemser.pessoaapi.repository.PessoaRepository;
 import br.com.vemser.pessoaapi.service.EmailService;
 import br.com.vemser.pessoaapi.service.PessoaService;
 // ----------- Import's Swagger ------------;
@@ -17,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 // ----------- Import's Java ---------------;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -29,7 +32,25 @@ public class PessoaController {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
     public PessoaController() {}
+
+    @GetMapping("/bynome")
+    public List<PessoaEntity> findAllByNomeIgnoreCase(@PathVariable("nome") String nome) throws RegraDeNegocioException {
+        return pessoaRepository.findAllByNomeIgnoreCase(nome);
+    }
+
+    @GetMapping("/bycpf")
+    public PessoaEntity findAllByCpf(@PathVariable("cpf") String cpf) throws RegraDeNegocioException {
+        return pessoaRepository.findAllByCpf(cpf);
+    }
+
+    @GetMapping("/bydata")
+    public List<PessoaEntity> findAllByDate(@PathVariable("data")LocalDate dataNascimento, LocalDate dataFinal) throws RegraDeNegocioException{
+        return pessoaRepository.findAllByDataNascimentoStartDateBetween(dataNascimento, dataFinal);
+    }
 
     @Operation(summary = "Listar pessoas", description = "Realizará a listagem de todas as pessoas cadastradas no banco de dados")
     @ApiResponses(
@@ -42,19 +63,6 @@ public class PessoaController {
     @GetMapping
     public List<PessoaDTO> list() {
         return pessoaService.list();
-    }
-
-    @Operation(summary = "Buscar pessoa pelo nome", description = "Realizará uma busca no banco de dados pela pessoa que corresponde ao nome informado")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Sucesso! A pessoa foi encontrada banco de dados"),
-                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução, foi gerada uma exceção")
-            }
-    )
-    @GetMapping("/byname")
-    public List<PessoaDTO> listByName(@RequestParam("nome") String nome) {
-        return pessoaService.listByName(nome);
     }
 
     @Operation(summary = "Adicionar pessoa", description = "Adicionará uma nova pessoa ao banco de dados")

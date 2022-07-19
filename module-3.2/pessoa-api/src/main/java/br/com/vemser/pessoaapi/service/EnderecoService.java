@@ -6,7 +6,7 @@ import br.com.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.enums.TipoDeMensagem;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
-import br.com.vemser.pessoaapi.dto.repository.EnderecoRepository;
+import br.com.vemser.pessoaapi.repository.EnderecoRepository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

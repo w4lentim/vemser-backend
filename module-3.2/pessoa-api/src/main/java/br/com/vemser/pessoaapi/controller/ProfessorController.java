@@ -1,7 +1,7 @@
 package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.entity.ProfessorEntity;
-import br.com.vemser.pessoaapi.dto.repository.ProfessorRepository;
+import br.com.vemser.pessoaapi.repository.ProfessorRepository;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
