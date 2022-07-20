@@ -41,6 +41,13 @@ public class EnderecoController {
         return new ResponseEntity<>(enderecoService.findEnderecoByIdEndereco(idEndereco), HttpStatus.OK);
     }
 
+    @Operation(summary = "Adicionar um endereço à uma pessoa", description = "Adicionará um endereço, vinculando-o à uma pessoa existente")
+    @Response
+    @PostMapping("/{idPessoa}")
+    public ResponseEntity<EnderecoDTO> create(@PathVariable("idPessoa") Integer idPessoa, @RequestBody @Valid EnderecoCreateDTO enderecoCreateDTO) throws RegraDeNegocioException {
+        return new ResponseEntity<>(enderecoService.create(idPessoa, enderecoCreateDTO), HttpStatus.OK);
+    }
+
     @Operation(summary = "Atualizar endereço", description = "Atualizará todos os dados de um endereço de acordo com ID informado")
     @Response
     @PutMapping("/{idEndereco}")

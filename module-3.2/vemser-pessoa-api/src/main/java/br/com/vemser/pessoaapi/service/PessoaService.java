@@ -49,7 +49,7 @@ public class PessoaService {
             return pessoaRepository.findAll().stream()
                     .map(pessoaEntity -> {
                         PessoaDTO pessoaDTO = pessoaEntityToDTO(pessoaEntity);
-                        pessoaDTO.setEnderecoDTOList(pessoaEntity.getEnderecoEntitySets().stream()
+                        pessoaDTO.setEnderecoDTO(pessoaEntity.getEnderecoEntitySet().stream()
                                 .map(this::enderecoEntityToDTO)
                                 .toList());
                         return pessoaDTO;
@@ -58,7 +58,7 @@ public class PessoaService {
             return pessoaRepository.findById(idPessoa)
                     .map(pessoaEntity -> {
                         PessoaDTO pessoaDTO = pessoaEntityToDTO(pessoaEntity);
-                        pessoaDTO.setEnderecoDTOList(pessoaEntity.getEnderecoEntitySets().stream()
+                        pessoaDTO.setEnderecoDTO(pessoaEntity.getEnderecoEntitySet().stream()
                                 .map(this::enderecoEntityToDTO).toList());
                         return pessoaDTO;
                     }).stream().toList();
@@ -70,7 +70,7 @@ public class PessoaService {
             return pessoaRepository.findAll().stream()
                     .map(pessoaEntity -> {
                         PessoaDTO pessoaDTO = pessoaEntityToDTO(pessoaEntity);
-                        pessoaDTO.setContatoDTOList(pessoaEntity.getContatoEntitySets().stream()
+                        pessoaDTO.setContatoDTO(pessoaEntity.getContatoEntitySet().stream()
                                 .map(this::contatoEntityToDTO).toList());
                         return pessoaDTO;
                     }).toList();
@@ -78,7 +78,7 @@ public class PessoaService {
             return pessoaRepository.findById(idPessoa)
                     .map(pessoaEntity -> {
                         PessoaDTO pessoaDTO = pessoaEntityToDTO(pessoaEntity);
-                        pessoaDTO.setContatoDTOList(pessoaEntity.getContatoEntitySets().stream()
+                        pessoaDTO.setContatoDTO(pessoaEntity.getContatoEntitySet().stream()
                                 .map(this::contatoEntityToDTO).toList());
                         return pessoaDTO;
                     }).stream().toList();

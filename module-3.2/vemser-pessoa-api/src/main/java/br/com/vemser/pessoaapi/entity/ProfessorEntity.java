@@ -3,7 +3,6 @@ package br.com.vemser.pessoaapi.entity;
 
 import br.com.vemser.pessoaapi.entity.pk.ProfessorPK;
 import lombok.*;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;

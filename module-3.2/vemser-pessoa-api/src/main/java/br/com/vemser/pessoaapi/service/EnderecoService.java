@@ -45,7 +45,7 @@ public class EnderecoService {
     public List<EnderecoDTO> listEnderecoByIdPessoa(Integer idPessoa) {
         return pessoaService.listPessoaAndEndereco(idPessoa)
                 .get(0)
-                .getEnderecoDTOList();
+                .getEnderecoDTO();
     }
 
     public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO enderecoCreateDTO) throws RegraDeNegocioException {

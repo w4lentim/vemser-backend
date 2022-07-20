@@ -13,7 +13,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class EnderecoEntity implements Serializable {
 
     @Id
@@ -49,5 +48,5 @@ public class EnderecoEntity implements Serializable {
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PESSOA_X_PESSOA_ENDERECO", joinColumns = @JoinColumn(name = "ID_ENDERECO"), inverseJoinColumns = @JoinColumn(name = "ID_PESSOA"))
-    private Set<PessoaEntity> pessoaEntitySets;
+    private Set<PessoaEntity> pessoaEntitySet;
 }

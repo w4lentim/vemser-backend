@@ -16,10 +16,10 @@ public class PessoaDTO extends PessoaCreateDTO {
     private Integer idPessoa;
 
     @Schema(description = "Endereços que a pessoa possui")
-    private List<EnderecoDTO> enderecoDTOList;
+    private List<EnderecoDTO> enderecoDTO;
 
     @Schema(description = "Contatos que a pessoa possui")
-    private List<ContatoDTO> contatoDTOList;
+    private List<ContatoDTO> contatoDTO;
 
     @Schema(description = "Pet que a pessoa possui")
     private PetDTO petDTO;

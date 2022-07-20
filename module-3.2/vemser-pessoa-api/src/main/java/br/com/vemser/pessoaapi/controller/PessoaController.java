@@ -40,28 +40,28 @@ public class PessoaController {
 
     @Operation(summary = "Listar pessoas e enderecos",  description = "Realizará a listagem de todas as pessoas e seus endereços associados. Caso queira solicitar informações de apenas uma pessoa, informe pelo Query Param, caso contrário, trará todas as informações.")
     @Response
-    @GetMapping("/listar-com-enderecos")
+    @GetMapping("/enderecos")
     public ResponseEntity<List<PessoaDTO>> listPessoaAndEnderecos(@RequestParam(required = false) Integer idPessoa) {
         return new ResponseEntity<>(pessoaService.listPessoaAndEndereco(idPessoa), HttpStatus.OK);
     }
 
     @Operation(summary = "Listar pessoas e contatos", description = "Realizará a listagem de todas as pessoas e seus contatos associados. Caso queira solicitar informações de apenas uma pessoa, informe pelo Query Param, caso contrário, trará todas as informações.")
     @Response
-    @GetMapping("/listar-com-contatos")
+    @GetMapping("/contatos")
     public ResponseEntity<List<PessoaDTO>> listPessoaAndContatos(@RequestParam(required = false) Integer idPessoa) {
         return new ResponseEntity<>(pessoaService.listPessoaAndContato(idPessoa), HttpStatus.OK);
     }
 
     @Operation(summary = "Listar pessoas e pets", description = "Realizará a listagem de todas as pessoas e seus contatos associados. Caso queira solicitar informações de apenas uma pessoa, informe pelo Query Param, caso contrário, trará todas as informações.")
     @Response
-    @GetMapping("/listar-com-pet")
+    @GetMapping("/pet")
     public ResponseEntity<List<PessoaDTO>> listPessoaAndPets(@RequestParam(required = false) Integer idPessoa) {
         return new ResponseEntity<>(pessoaService.listPessoaAndPets(idPessoa), HttpStatus.OK);
     }
 
     @Operation(summary = "Listar pessoa pelo cpf", description = "Realizará a listagem dos dados da pessoa associada ao CPF.")
     @Response
-    @GetMapping("bycpf/{cpf}")
+    @GetMapping("/{cpf}")
     public ResponseEntity<PessoaDTO> listByCpf(@PathVariable ("cpf") String cpf){
         return new ResponseEntity<>(pessoaService.listByCpf(cpf), HttpStatus.OK);
     }

@@ -13,7 +13,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class PessoaEntity implements Serializable {
 
     @Id
@@ -37,13 +36,13 @@ public class PessoaEntity implements Serializable {
     // ER PESSOA <-> CONTATO
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoaEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ContatoEntity> contatoEntitySets;
+    private Set<ContatoEntity> contatoEntitySet;
 
     // ER PESSOA <-> PESSOA X ENDERECO
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PESSOA_X_PESSOA_ENDERECO", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
-    private Set<EnderecoEntity> enderecoEntitySets;
+    private Set<EnderecoEntity> enderecoEntitySet;
 
     // ER PESSOA <-> PET
     @JsonIgnore
