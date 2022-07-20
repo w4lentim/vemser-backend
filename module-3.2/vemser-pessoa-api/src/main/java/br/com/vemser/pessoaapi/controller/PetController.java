@@ -1,8 +1,8 @@
 package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.config.Response;
-import br.com.vemser.pessoaapi.client.dto.PetCreateDTO;
-import br.com.vemser.pessoaapi.client.dto.PetDTO;
+import br.com.vemser.pessoaapi.dto.PetCreateDTO;
+import br.com.vemser.pessoaapi.dto.PetDTO;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.PetService;
 import io.swagger.v3.oas.annotations.Operation;

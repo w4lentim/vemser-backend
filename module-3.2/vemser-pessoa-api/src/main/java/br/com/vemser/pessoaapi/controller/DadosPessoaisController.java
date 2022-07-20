@@ -1,7 +1,7 @@
 package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.config.Response;
-import br.com.vemser.pessoaapi.client.dto.DadosPessoaisDTO;
+import br.com.vemser.pessoaapi.dto.DadosPessoaisDTO;
 import br.com.vemser.pessoaapi.service.DadosPessoaisService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;

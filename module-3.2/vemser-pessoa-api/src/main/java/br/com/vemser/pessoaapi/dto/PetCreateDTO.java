@@ -1,4 +1,4 @@
-package br.com.vemser.pessoaapi.client.dto;
+package br.com.vemser.pessoaapi.dto;
 
 
 import br.com.vemser.pessoaapi.enums.TipoDoPet;

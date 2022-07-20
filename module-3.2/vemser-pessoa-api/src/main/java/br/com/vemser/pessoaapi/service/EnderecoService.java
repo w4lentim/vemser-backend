@@ -1,7 +1,7 @@
 package br.com.vemser.pessoaapi.service;
 
-import br.com.vemser.pessoaapi.client.dto.EnderecoCreateDTO;
-import br.com.vemser.pessoaapi.client.dto.EnderecoDTO;
+import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
+import br.com.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.enums.TipoDeMensagem;

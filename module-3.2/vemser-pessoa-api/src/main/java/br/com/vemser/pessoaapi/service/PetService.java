@@ -1,7 +1,7 @@
 package br.com.vemser.pessoaapi.service;
 
-import br.com.vemser.pessoaapi.client.dto.PetCreateDTO;
-import br.com.vemser.pessoaapi.client.dto.PetDTO;
+import br.com.vemser.pessoaapi.dto.PetCreateDTO;
+import br.com.vemser.pessoaapi.dto.PetDTO;
 import br.com.vemser.pessoaapi.entity.PetEntity;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.PetRepository;

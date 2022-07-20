@@ -1,8 +1,8 @@
 package br.com.vemser.pessoaapi.controller;
 // ----------- Import's Classes ------------;
 import br.com.vemser.pessoaapi.config.Response;
-import br.com.vemser.pessoaapi.client.dto.PessoaCreateDTO;
-import br.com.vemser.pessoaapi.client.dto.PessoaDTO;
+import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
+import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.PessoaService;
 // ----------- Import's Swagger ------------;
