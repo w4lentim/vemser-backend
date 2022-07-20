@@ -3,6 +3,8 @@ package br.com.vemser.pessoaapi.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,4 +15,12 @@ public class PessoaDTO extends PessoaCreateDTO {
     @Schema(description = "Identificador (ID) da pessoa.")
     private Integer idPessoa;
 
+    @Schema(description = "Endereços que a pessoa possui")
+    private List<EnderecoDTO> enderecoDTOList;
+
+    @Schema(description = "Contatos que a pessoa possui")
+    private List<ContatoDTO> contatoDTOList;
+
+    @Schema(description = "Pet que a pessoa possui")
+    private PetDTO petDTO;
 }

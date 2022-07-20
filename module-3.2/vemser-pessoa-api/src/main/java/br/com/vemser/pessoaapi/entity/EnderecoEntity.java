@@ -1,9 +1,12 @@
 package br.com.vemser.pessoaapi.entity;
 
 import br.com.vemser.pessoaapi.enums.TipoDeEndereco;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity(name = "ENDERECO_PESSOA")
 @Getter
@@ -11,15 +14,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class EnderecoEntity {
+public class EnderecoEntity implements Serializable {
 
     @Id
     @SequenceGenerator(name = "ENDERECO_SEQ", sequenceName = "SEQ_ENDERECO_CONTATO", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ENDERECO_SEQ")
     @Column(name = "ID_ENDERECO")
     private Integer idEndereco;
-
-//    private Integer idPessoa;
 
     @Column(name = "TIPO")
     private TipoDeEndereco tipo;
@@ -44,4 +45,9 @@ public class EnderecoEntity {
 
     @Column(name = "PAIS")
     private String pais;
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "PESSOA_X_PESSOA_ENDERECO", joinColumns = @JoinColumn(name = "ID_ENDERECO"), inverseJoinColumns = @JoinColumn(name = "ID_PESSOA"))
+    private Set<PessoaEntity> pessoaEntitySets;
 }

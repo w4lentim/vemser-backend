@@ -1,9 +1,12 @@
 package br.com.vemser.pessoaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity(name = "PESSOA")
 @Getter
@@ -11,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class PessoaEntity {
+public class PessoaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PESSOA_SEQ")
@@ -30,4 +33,21 @@ public class PessoaEntity {
 
     @Column(name = "EMAIL")
     private String email;
+
+    // ER PESSOA <-> CONTATO
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoaEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ContatoEntity> contatoEntitySets;
+
+    // ER PESSOA <-> PESSOA X ENDERECO
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "PESSOA_X_PESSOA_ENDERECO", joinColumns = @JoinColumn(name = "ID_PESSOA"), inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO"))
+    private Set<EnderecoEntity> enderecoEntitySets;
+
+    // ER PESSOA <-> PET
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PET", referencedColumnName = "ID_PET")
+    private PetEntity petEntity;
 }

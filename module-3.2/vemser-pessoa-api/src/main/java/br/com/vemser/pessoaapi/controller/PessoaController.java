@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.controller;
 // ----------- Import's Classes ------------;
+import br.com.vemser.pessoaapi.config.Response;
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
@@ -29,76 +30,65 @@ public class PessoaController {
 
     @Autowired
     private PessoaService pessoaService;
-    @Autowired
-    private EmailService emailService;
-
-    @Autowired
-    private PessoaRepository pessoaRepository;
-
-    public PessoaController() {}
-
-    @GetMapping("/bynome")
-    public List<PessoaEntity> findAllByNomeIgnoreCase(@PathVariable("nome") String nome) throws RegraDeNegocioException {
-        return pessoaRepository.findAllByNomeIgnoreCase(nome);
-    }
-
-    @GetMapping("/bycpf")
-    public PessoaEntity findAllByCpf(@PathVariable("cpf") String cpf) throws RegraDeNegocioException {
-        return pessoaRepository.findAllByCpf(cpf);
-    }
-
-    @GetMapping("/bydata")
-    public List<PessoaEntity> findAllByDate(@PathVariable("data")LocalDate dataNascimento, LocalDate dataFinal) throws RegraDeNegocioException{
-        return pessoaRepository.findAllByDataNascimentoStartDateBetween(dataNascimento, dataFinal);
-    }
 
     @Operation(summary = "Listar pessoas", description = "Realizará a listagem de todas as pessoas cadastradas no banco de dados")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Sucesso! As pessoas foram listadas com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução, foi gerada uma exceção")
-            }
-    )
+    @Response
     @GetMapping
-    public List<PessoaDTO> list() {
-        return pessoaService.list();
+    public ResponseEntity<List<PessoaDTO>> list() {
+        return new ResponseEntity<>(pessoaService.list(), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Listar pessoas e enderecos",  description = "Realizará a listagem de todas as pessoas e seus endereços associados. Caso queira solicitar informações de apenas uma pessoa, informe pelo Query Param, caso contrário, trará todas as informações.")
+    @Response
+    @GetMapping("/listar-com-enderecos")
+    public ResponseEntity<List<PessoaDTO>> listPessoaAndEnderecos(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.listPessoaAndEndereco(idPessoa), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Listar pessoas e contatos", description = "Realizará a listagem de todas as pessoas e seus contatos associados. Caso queira solicitar informações de apenas uma pessoa, informe pelo Query Param, caso contrário, trará todas as informações.")
+    @Response
+    @GetMapping("/listar-com-contatos")
+    public ResponseEntity<List<PessoaDTO>> listPessoaAndContatos(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.listPessoaAndContato(idPessoa), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Listar pessoas e pets", description = "Realizará a listagem de todas as pessoas e seus contatos associados. Caso queira solicitar informações de apenas uma pessoa, informe pelo Query Param, caso contrário, trará todas as informações.")
+    @Response
+    @GetMapping("/listar-com-pet")
+    public ResponseEntity<List<PessoaDTO>> listPessoaAndPets(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.listPessoaAndPets(idPessoa), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Listar pessoa pelo cpf", description = "Realizará a listagem dos dados da pessoa associada ao CPF.")
+    @Response
+    @GetMapping("bycpf/{cpf}")
+    public ResponseEntity<PessoaDTO> listByCpf(@PathVariable ("cpf") String cpf){
+        return new ResponseEntity<>(pessoaService.listByCpf(cpf), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Listar pessoas pelo nome", description = "Realizará a listagem de todas as pessoas que fazem referência ao nome informado.")
+    @Response
+    @GetMapping("/bynome/{by-nome}")
+    public ResponseEntity<List<PessoaDTO>> listContainsNome(@PathVariable ("by-nome") String nome) {
+        return new ResponseEntity<>(pessoaService.listContainsNome(nome), HttpStatus.OK);
     }
 
     @Operation(summary = "Adicionar pessoa", description = "Adicionará uma nova pessoa ao banco de dados")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Sucesso! A pessoa foi adicionada com sucesso ao banco de dados"),
-                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução, foi gerada uma exceção")
-            }
-    )
+    @Response
     @PostMapping
     public ResponseEntity<PessoaDTO> create(@RequestBody @Valid PessoaCreateDTO pessoa) throws RegraDeNegocioException {
         return new ResponseEntity<>(pessoaService.create(pessoa), HttpStatus.CREATED);
     }
 
     @Operation(summary = "Atualizar pessoa", description = "Atualizará os dados de uma pessoa do banco de dados")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Sucesso! Os dados da pessoa informada foram atualizados com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução, foi gerada uma exceção")
-            }
-    )
+    @Response
     @PutMapping("/{idPessoa}")
     public ResponseEntity<PessoaDTO> update(@PathVariable("idPessoa") Integer id, @RequestBody @Valid PessoaCreateDTO pessoaAtualizar) throws RegraDeNegocioException {
         return new ResponseEntity<>(pessoaService.update(id, pessoaAtualizar), HttpStatus.ACCEPTED);
     }
 
     @Operation(summary = "Deletar pessoa", description = "Deletará a pessoa e todos os seus dados do banco de dados")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Sucesso! A pessoa e todos os seus dados foram removidos com sucesso do banco de dados"),
-                    @ApiResponse(responseCode = "403", description = "Permissao negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execuçao, foi gerada uma exceção")
-            }
-    )
+    @Response
     @DeleteMapping("/{idPessoa}")
     public ResponseEntity<Void> delete(@PathVariable("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
         pessoaService.delete(idPessoa);

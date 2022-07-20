@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.controller;
 // ------------ Import's Classes -------------------;
+import br.com.vemser.pessoaapi.config.Response;
 import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
@@ -27,78 +28,28 @@ public class EnderecoController {
     private EnderecoService enderecoService;
 
     @Operation(summary = "Listar endereços", description = "Listará todos os endereços do banco de dados")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Sucesso! Todos endereços foram listados com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Permissão negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução, foi gerada uma exceção")
-            }
-    )
+    @Response
     @GetMapping
     public ResponseEntity<List<EnderecoDTO>> list() {
         return new ResponseEntity<>(enderecoService.list(), HttpStatus.OK);
     }
 
     @Operation(summary = "Listar endereço pelo ID", description = "Listará um endereço do banco de acordo com o ID")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Sucesso! O endereço referente ao ID foi listado com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Permissao negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução, foi gerada uma exceção")
-            }
-    )
+    @Response
     @GetMapping("/{idEndereco}")
     public ResponseEntity<EnderecoDTO> listEnderecoByIdEndereco(@PathVariable("idEndereco") Integer idEndereco) throws RegraDeNegocioException {
-        return new ResponseEntity<>(enderecoService.listEnderecoByIdEndereco(idEndereco), HttpStatus.OK);
+        return new ResponseEntity<>(enderecoService.findEnderecoByIdEndereco(idEndereco), HttpStatus.OK);
     }
 
-//    @Operation(summary = "Listar endereços da pessoa", description = "Listará os endereços associados a pessoa")
-//    @ApiResponses(
-//            value = {
-//                    @ApiResponse(responseCode = "200", description = "Sucesso! Os endereços associados a pessoa informada foram listados com sucesso"),
-//                    @ApiResponse(responseCode = "403", description = "Permissao negada! Você não possui permissão para utilizar este recurso"),
-//                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execuçao, foi gerada uma exceção")
-//            }
-//    )
-////    @GetMapping("/{idPessoa}/pessoa")
-////    public ResponseEntity<List<EnderecoDTO>> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
-////        return new ResponseEntity<>(enderecoService.list(idPessoa), HttpStatus.OK);
-////    }
-
-//    @Operation(summary = "Adicionar um endereço a pessoa", description = "Adicionará um novo endereço a uma pessoa do banco de dados")
-//    @ApiResponses(
-//            value = {
-//                    @ApiResponse(responseCode = "200", description = "Sucesso! O endereço foi adicionado a pessoa com sucesso"),
-//                    @ApiResponse(responseCode = "403", description = "Permissao negada! Você não possui permissão para utilizar este recurso"),
-//                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execuçao, foi gerada uma exceção")
-//            }
-//    )
-//    @PostMapping("/{idPessoa}")
-//    public ResponseEntity<EnderecoDTO> create(@PathVariable("idPessoa") Integer idPessoa, @RequestBody @Valid EnderecoCreateDTO endereco) throws RegraDeNegocioException {
-//        return new ResponseEntity<>(enderecoService.create(idPessoa, endereco), HttpStatus.CREATED);
-//    }
-
     @Operation(summary = "Atualizar endereço", description = "Atualizará todos os dados de um endereço de acordo com ID informado")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Sucesso! Os dados do endereço foram atualizados com sucesso"),
-                    @ApiResponse(responseCode = "403", description = "Permissao negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execuçao, foi gerada uma exceção")
-            }
-    )
+    @Response
     @PutMapping("/{idEndereco}")
     public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") Integer idEndereco, @RequestBody @Valid EnderecoCreateDTO enderecoAtualizar) throws RegraDeNegocioException {
         return new ResponseEntity<>(enderecoService.update(idEndereco, enderecoAtualizar), HttpStatus.ACCEPTED);
     }
 
     @Operation(summary = "Deletar endereço", description = "Deletará um endereço do banco de dados")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Sucesso! O endereço foi removido com sucesso do banco de dados"),
-                    @ApiResponse(responseCode = "403", description = "Permissao negada! Você não possui permissão para utilizar este recurso"),
-                    @ApiResponse(responseCode = "500", description = "Erro! Durante a execução, foi gerada uma exceção")
-            }
-    )
+    @Response
     @DeleteMapping("/{idEndereco}")
     public ResponseEntity<Void> delete(@PathVariable("idEndereco") Integer idEndereco) throws RegraDeNegocioException {
         enderecoService.delete(idEndereco);

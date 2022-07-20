@@ -76,7 +76,7 @@ public class PessoaDadosPessoaisService {
     }
 
     public void delete(Integer idPessoa) throws RegraDeNegocioException {
-        PessoaEntity pessoaEntity = pessoaService.listByIdPessoa(idPessoa);
+        PessoaEntity pessoaEntity = pessoaService.findByIdPessoa(idPessoa);
         pessoaService.delete(idPessoa);
         if (dadosPessoaisService.getAll().stream()
                 .anyMatch(dadosPessoaisDTO -> dadosPessoaisDTO.getCpf().equals(pessoaEntity.getCpf()))) {

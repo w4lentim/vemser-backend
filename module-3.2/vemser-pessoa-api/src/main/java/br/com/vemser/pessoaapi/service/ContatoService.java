@@ -8,6 +8,7 @@ import br.com.vemser.pessoaapi.repository.ContatoRepository;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +17,11 @@ import java.util.List;
 @Slf4j
 public class ContatoService {
 
+    @Autowired
     private ContatoRepository contatoRepository;
+    @Autowired
     private PessoaService pessoaService;
+    @Autowired
     private ObjectMapper objectMapper;
 
     public List<ContatoDTO> list() {
@@ -29,7 +33,7 @@ public class ContatoService {
     public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contatoCreateDTO) throws RegraDeNegocioException {
         log.info("Criando contato...");
 
-        PessoaEntity pessoaEntity = pessoaService.listByIdPessoa(idPessoa);
+        PessoaEntity pessoaEntity = pessoaService.findByIdPessoa(idPessoa);
         contatoCreateDTO.setIdPessoa(idPessoa);
 
         log.info("Adicionando um novo contato à " + pessoaEntity.getNome());
@@ -41,7 +45,7 @@ public class ContatoService {
 
     public ContatoDTO update(Integer idContato, ContatoCreateDTO contatoAtualizar) throws RegraDeNegocioException {
 
-        PessoaEntity pessoaEntity = pessoaService.listByIdPessoa(contatoAtualizar.getIdPessoa());
+        PessoaEntity pessoaEntity = pessoaService.findByIdPessoa(contatoAtualizar.getIdPessoa());
 
         log.info("Atualizando os dados de contato de " + pessoaEntity.getNome());
 
@@ -58,7 +62,7 @@ public class ContatoService {
     }
 
     public void delete(Integer idContato) throws RegraDeNegocioException {
-        PessoaEntity pessoaEntity = pessoaService.listByIdPessoa(findByIdContato(idContato).getIdPessoa());
+        PessoaEntity pessoaEntity = pessoaService.findByIdPessoa(findByIdContato(idContato).getIdPessoa());
         log.info("Removendo contato do banco de dados...");
         contatoRepository.delete(findByIdContato(idContato));
         log.info("Contato removido com sucesso!");
