@@ -1,7 +1,7 @@
 package br.com.vemser.pessoaapi.controller;
 
-import br.com.vemser.pessoaapi.dto.PessoaDadosPessoaisCreateDTO;
-import br.com.vemser.pessoaapi.dto.PessoaDadosPessoaisDTO;
+import br.com.vemser.pessoaapi.client.dto.PessoaDadosPessoaisCreateDTO;
+import br.com.vemser.pessoaapi.client.dto.PessoaDadosPessoaisDTO;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.PessoaDadosPessoaisService;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,17 +1,12 @@
 package br.com.vemser.pessoaapi.controller;
 // ----------- Import's Classes ------------;
 import br.com.vemser.pessoaapi.config.Response;
-import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
-import br.com.vemser.pessoaapi.dto.PessoaDTO;
-import br.com.vemser.pessoaapi.entity.PessoaEntity;
+import br.com.vemser.pessoaapi.client.dto.PessoaCreateDTO;
+import br.com.vemser.pessoaapi.client.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
-import br.com.vemser.pessoaapi.repository.PessoaRepository;
-import br.com.vemser.pessoaapi.service.EmailService;
 import br.com.vemser.pessoaapi.service.PessoaService;
 // ----------- Import's Swagger ------------;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 // ----------- Import's SpringFramework ----;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +15,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 // ----------- Import's Java ---------------;
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController

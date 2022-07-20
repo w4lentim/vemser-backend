@@ -1,8 +1,8 @@
 package br.com.vemser.pessoaapi.controller;
 // ---------------- Import's Classes -----------------;
 import br.com.vemser.pessoaapi.config.Response;
-import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
-import br.com.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.vemser.pessoaapi.client.dto.ContatoCreateDTO;
+import br.com.vemser.pessoaapi.client.dto.ContatoDTO;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.ContatoService;
 // ---------------- Import's SpringBoot --------------;

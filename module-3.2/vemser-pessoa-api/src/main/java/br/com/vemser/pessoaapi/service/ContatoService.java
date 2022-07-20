@@ -1,7 +1,7 @@
 package br.com.vemser.pessoaapi.service;
 
-import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
-import br.com.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.vemser.pessoaapi.client.dto.ContatoCreateDTO;
+import br.com.vemser.pessoaapi.client.dto.ContatoDTO;
 import br.com.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.repository.ContatoRepository;

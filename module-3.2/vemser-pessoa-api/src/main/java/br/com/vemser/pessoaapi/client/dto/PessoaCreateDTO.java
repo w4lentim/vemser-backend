@@ -1,4 +1,4 @@
-package br.com.vemser.pessoaapi.dto;
+package br.com.vemser.pessoaapi.client.dto;
 // ------------ Import's Swagger --------------;
 import io.swagger.v3.oas.annotations.media.Schema;
 // ------------ Import's Lombok ---------------;

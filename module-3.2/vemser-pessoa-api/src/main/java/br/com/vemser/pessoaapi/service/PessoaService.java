@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.service;
 
+import br.com.vemser.pessoaapi.client.dto.*;
 import br.com.vemser.pessoaapi.dto.*;
 import br.com.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.vemser.pessoaapi.entity.EnderecoEntity;

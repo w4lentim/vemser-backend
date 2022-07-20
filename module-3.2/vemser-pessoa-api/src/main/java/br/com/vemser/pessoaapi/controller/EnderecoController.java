@@ -1,14 +1,12 @@
 package br.com.vemser.pessoaapi.controller;
 // ------------ Import's Classes -------------------;
 import br.com.vemser.pessoaapi.config.Response;
-import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
-import br.com.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.vemser.pessoaapi.client.dto.EnderecoCreateDTO;
+import br.com.vemser.pessoaapi.client.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.EnderecoService;
 // ------------ Import's Swagger -------------------;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 // ------------ Import's SpringBoot ----------------;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

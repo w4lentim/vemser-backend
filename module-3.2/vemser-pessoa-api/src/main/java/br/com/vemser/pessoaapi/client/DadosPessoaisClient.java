@@ -1,6 +1,6 @@
 package br.com.vemser.pessoaapi.client;
 
-import br.com.vemser.pessoaapi.dto.DadosPessoaisDTO;
+import br.com.vemser.pessoaapi.client.dto.DadosPessoaisDTO;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;

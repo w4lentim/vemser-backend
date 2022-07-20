@@ -1,4 +1,4 @@
-package br.com.vemser.pessoaapi.dto;
+package br.com.vemser.pessoaapi.client.dto;
 
 import br.com.vemser.pessoaapi.enums.TipoDeEndereco;
 import io.swagger.v3.oas.annotations.media.Schema;
