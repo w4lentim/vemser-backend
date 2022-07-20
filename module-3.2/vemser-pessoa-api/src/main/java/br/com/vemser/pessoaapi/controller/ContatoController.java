@@ -3,7 +3,10 @@ package br.com.vemser.pessoaapi.controller;
 import br.com.vemser.pessoaapi.config.Response;
 import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.vemser.pessoaapi.entity.ContatoEntity;
+import br.com.vemser.pessoaapi.enums.TipoDeContato;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
+import br.com.vemser.pessoaapi.repository.ContatoRepository;
 import br.com.vemser.pessoaapi.service.ContatoService;
 // ---------------- Import's SpringBoot --------------;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,6 +25,14 @@ import java.util.List;
 public class ContatoController {
     @Autowired
     private ContatoService contatoService;
+
+    @Autowired
+    private ContatoRepository contatoRepository;
+
+    @GetMapping("/contato-por-tipo")
+    public List<ContatoEntity> getContatoByTipo(TipoDeContato tipoDeContato) {
+        return contatoRepository.listContatoByTipo(tipoDeContato);
+    }
 
     @Operation(summary = "Listar contatos", description = "Listará todos os contatos contidos no banco de dados")
     @Response

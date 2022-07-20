@@ -3,7 +3,9 @@ package br.com.vemser.pessoaapi.controller;
 import br.com.vemser.pessoaapi.config.Response;
 import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
+import br.com.vemser.pessoaapi.repository.EnderecoRepository;
 import br.com.vemser.pessoaapi.service.EnderecoService;
 // ------------ Import's Swagger -------------------;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,6 +26,14 @@ public class EnderecoController {
 
     @Autowired
     private EnderecoService enderecoService;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
+    @GetMapping("/pais")
+    public List<EnderecoEntity> getEnderecoByPais(String pais) {
+        return enderecoRepository.listEnderecoByPais(pais);
+    }
 
     @Operation(summary = "Listar endereços", description = "Listará todos os endereços do banco de dados")
     @Response

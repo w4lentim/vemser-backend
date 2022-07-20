@@ -3,7 +3,9 @@ package br.com.vemser.pessoaapi.controller;
 import br.com.vemser.pessoaapi.config.Response;
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
+import br.com.vemser.pessoaapi.repository.PessoaRepository;
 import br.com.vemser.pessoaapi.service.PessoaService;
 // ----------- Import's Swagger ------------;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,6 +26,14 @@ public class PessoaController {
 
     @Autowired
     private PessoaService pessoaService;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
+    @GetMapping("/pessoa/cpf")
+    public List<PessoaEntity> listPessoaByCpf(@RequestParam String cpf) {
+        return pessoaRepository.listPessoaByCpf(cpf);
+    }
 
     @Operation(summary = "Listar pessoas", description = "Realizará a listagem de todas as pessoas cadastradas no banco de dados")
     @Response
