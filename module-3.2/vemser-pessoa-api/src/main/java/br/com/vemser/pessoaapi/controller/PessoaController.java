@@ -3,6 +3,7 @@ package br.com.vemser.pessoaapi.controller;
 import br.com.vemser.pessoaapi.config.Response;
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.vemser.pessoaapi.dto.RelatorioPersonalizadoDTO;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.PessoaRepository;
@@ -30,11 +31,6 @@ public class PessoaController {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    @GetMapping("/pessoa/cpf")
-    public List<PessoaEntity> listPessoaByCpf(@RequestParam String cpf) {
-        return pessoaRepository.listPessoaByCpf(cpf);
-    }
-
     @Operation(summary = "Listar pessoas", description = "Realizará a listagem de todas as pessoas cadastradas no banco de dados")
     @Response
     @GetMapping
@@ -61,6 +57,24 @@ public class PessoaController {
     @GetMapping("/pet")
     public ResponseEntity<List<PessoaDTO>> listPessoaAndPets(@RequestParam(required = false) Integer idPessoa) {
         return new ResponseEntity<>(pessoaService.listPessoaAndPets(idPessoa), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Listar pessoa completa", description = "Listará todas as pessoas do banco de dados, com seus respectivos dados.")
+    @GetMapping("/pessoa-completa")
+    public ResponseEntity<List<PessoaDTO>> listRelatorioPessoaCompleta(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.listPessoaCompleta(idPessoa), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Relatório das pessoas", description = "Listará o relatório personalizado de uma pessoa do banco de dados.")
+    @Response
+    @GetMapping("/relatorio-personalizado")
+    public ResponseEntity<List<RelatorioPersonalizadoDTO>> relatorioPessoa(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.relatorioPessoa(idPessoa), HttpStatus.OK);
+    }
+
+    @GetMapping("/pessoa/cpf")
+    public List<PessoaEntity> listPessoaByCpf(@RequestParam String cpf) {
+        return pessoaRepository.listPessoaByCpf(cpf);
     }
 
     @Operation(summary = "Listar pessoa pelo cpf", description = "Realizará a listagem dos dados da pessoa associada ao CPF.")

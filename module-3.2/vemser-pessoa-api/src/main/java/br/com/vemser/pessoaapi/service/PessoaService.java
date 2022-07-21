@@ -44,6 +44,33 @@ public class PessoaService {
                 .toList();
     }
 
+    public List<PessoaDTO> listPessoaCompleta(Integer idPessoa) {
+        if (idPessoa == null) {
+            return pessoaRepository.findAll().stream()
+                    .map(pessoaEntity -> {
+                        PessoaDTO pessoaDTO = pessoaEntityToDTO(pessoaEntity);
+                        pessoaDTO.setEnderecoDTO(pessoaEntity.getEnderecoEntitySet().stream()
+                                .map(this::enderecoEntityToDTO)
+                                .toList());
+                        pessoaDTO.setContatoDTO(pessoaEntity.getContatoEntitySet().stream()
+                                .map(this::contatoEntityToDTO).toList());
+                        pessoaDTO.setPetDTO(petEntityToDTO(pessoaEntity.getPetEntity()));
+                        return pessoaDTO;
+                    }).toList();
+        } else {
+            return pessoaRepository.findById(idPessoa)
+                    .map(pessoaEntity -> {
+                        PessoaDTO pessoaDTO = pessoaEntityToDTO(pessoaEntity);
+                        pessoaDTO.setEnderecoDTO(pessoaEntity.getEnderecoEntitySet().stream()
+                                .map(this::enderecoEntityToDTO).toList());
+                        pessoaDTO.setContatoDTO(pessoaEntity.getContatoEntitySet().stream()
+                                .map(this::contatoEntityToDTO).toList());
+                        pessoaDTO.setPetDTO(petEntityToDTO(pessoaEntity.getPetEntity()));
+                        return pessoaDTO;
+                    }).stream().toList();
+        }
+    }
+
     public List<PessoaDTO> listPessoaAndEndereco(Integer idPessoa) {
         if (idPessoa == null) {
             return pessoaRepository.findAll().stream()
@@ -63,6 +90,10 @@ public class PessoaService {
                         return pessoaDTO;
                     }).stream().toList();
         }
+    }
+
+    public List<RelatorioPersonalizadoDTO> relatorioPessoa(Integer idPessoa) {
+        return pessoaRepository.relatorioPessoa(idPessoa);
     }
 
     public List<PessoaDTO> listPessoaAndContato(Integer idPessoa) {

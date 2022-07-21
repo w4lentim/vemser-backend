@@ -49,6 +49,13 @@ public class EnderecoController {
         return new ResponseEntity<>(enderecoService.findEnderecoByIdEndereco(idEndereco), HttpStatus.OK);
     }
 
+    @Operation(summary = "Listar endereços de uma pessoa", description = "Listará todos os endereços de uma pessoa associados ao ID.")
+    @Response
+    @GetMapping("/{idPessoa}/pessoa")
+    public ResponseEntity<List<EnderecoDTO>> listEnderecoByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
+        return new ResponseEntity<>(enderecoService.listEnderecoByIdPessoa(idPessoa), HttpStatus.OK);
+    }
+
     @Operation(summary = "Adicionar um endereço à uma pessoa", description = "Adicionará um endereço, vinculando-o à uma pessoa existente")
     @Response
     @PostMapping("/{idPessoa}")

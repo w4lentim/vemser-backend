@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.repository;
 
+import br.com.vemser.pessoaapi.dto.RelatorioPersonalizadoDTO;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +21,22 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
             "FROM PESSOA P " +
             "WHERE P.cpf = :cpf")
     List<PessoaEntity> listPessoaByCpf(@Param("cpf") String cpf);
+
+    @Query(" SELECT new br.com.vemser.pessoaapi.dto.RelatorioPersonalizadoDTO(" +
+            "           p.idPessoa, " +
+            "           p.nome, " +
+            "           p.email, " +
+            "           contato.numero, " +
+            "           endereco.cep, " +
+            "           endereco.cidade, " +
+            "           endereco.estado, " +
+            "           endereco.pais, " +
+            "           pt.nome " +
+            ")" +
+            "      FROM PESSOA p " +
+            " LEFT JOIN p.contatoEntitySet contato " +
+            " LEFT JOIN p.enderecoEntitySet endereco " +
+            " LEFT JOIN p.petEntity pt " +
+            "     WHERE (:idPessoa is null or p.idPessoa = :idPessoa)")
+    List<RelatorioPersonalizadoDTO> relatorioPessoa(@Param("idPessoa") Integer idPessoa);
 }
