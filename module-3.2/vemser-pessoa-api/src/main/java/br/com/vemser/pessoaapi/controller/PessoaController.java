@@ -28,9 +28,6 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
-    @Autowired
-    private PessoaRepository pessoaRepository;
-
     @Operation(summary = "Listar pessoas", description = "Realizará a listagem de todas as pessoas cadastradas no banco de dados")
     @Response
     @GetMapping
@@ -72,15 +69,10 @@ public class PessoaController {
         return new ResponseEntity<>(pessoaService.relatorioPessoa(idPessoa), HttpStatus.OK);
     }
 
-    @GetMapping("/pessoa/cpf")
-    public List<PessoaEntity> listPessoaByCpf(@RequestParam String cpf) {
-        return pessoaRepository.listPessoaByCpf(cpf);
-    }
-
-    @Operation(summary = "Listar pessoa pelo cpf", description = "Realizará a listagem dos dados da pessoa associada ao CPF.")
+    @Operation(summary = "Listar pessoa pelo cpf",description = "Listará as pessoas associadas ao CPF.")
     @Response
-    @GetMapping("/{cpf}")
-    public ResponseEntity<PessoaDTO> listByCpf(@PathVariable ("cpf") String cpf){
+    @GetMapping("/bycpf/{cpf}")
+    public ResponseEntity<PessoaDTO> listByCpf(@PathVariable ("cpf") String cpf) {
         return new ResponseEntity<>(pessoaService.listByCpf(cpf), HttpStatus.OK);
     }
 

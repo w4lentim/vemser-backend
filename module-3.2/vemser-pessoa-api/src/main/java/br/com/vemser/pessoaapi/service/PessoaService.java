@@ -34,14 +34,8 @@ public class PessoaService {
                 .map(this::pessoaEntityToDTO).toList();
     }
 
-    public List<PessoaDTO> findByNome(String nome) {
-        return pessoaRepository.findAll()
-                .stream()
-                .filter(pessoa -> pessoa.getNome().toLowerCase().contains(nome.toLowerCase()))
-                .toList()
-                .stream()
-                .map(this::pessoaEntityToDTO)
-                .toList();
+    public List<RelatorioPersonalizadoDTO> relatorioPessoa(Integer idPessoa) {
+        return pessoaRepository.relatorioPessoa(idPessoa);
     }
 
     public List<PessoaDTO> listPessoaCompleta(Integer idPessoa) {
@@ -51,7 +45,7 @@ public class PessoaService {
                         PessoaDTO pessoaDTO = pessoaEntityToDTO(pessoaEntity);
                         pessoaDTO.setEnderecoDTO(pessoaEntity.getEnderecoEntitySet().stream()
                                 .map(this::enderecoEntityToDTO)
-                                .toList());
+                                    .toList());
                         pessoaDTO.setContatoDTO(pessoaEntity.getContatoEntitySet().stream()
                                 .map(this::contatoEntityToDTO).toList());
                         pessoaDTO.setPetDTO(petEntityToDTO(pessoaEntity.getPetEntity()));
@@ -90,10 +84,6 @@ public class PessoaService {
                         return pessoaDTO;
                     }).stream().toList();
         }
-    }
-
-    public List<RelatorioPersonalizadoDTO> relatorioPessoa(Integer idPessoa) {
-        return pessoaRepository.relatorioPessoa(idPessoa);
     }
 
     public List<PessoaDTO> listPessoaAndContato(Integer idPessoa) {
