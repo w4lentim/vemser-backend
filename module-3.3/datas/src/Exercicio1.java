@@ -12,16 +12,17 @@ public class Exercicio1 {
         int meses;
         LocalDate dataAtual = LocalDate.now();
         LocalDate dataAniversario;
+        Period periodo;
 
         System.out.println("Informe a data que você faz aniversário (YYYY-MM-DD): ");
         dataAniversario = LocalDate.parse(sc.nextLine());
 
         if (dataAniversario.withYear(dataAtual.getYear()).isBefore(dataAtual)) {
-            Period periodo = Period.between(dataAtual, dataAniversario.withYear(dataAtual.plusYears(1).getYear()));
+            periodo = Period.between(dataAtual, dataAniversario.withYear(dataAtual.plusYears(1).getYear()));
             dias = periodo.getDays();
             meses = periodo.getMonths();
         } else {
-            Period periodo = Period.between(dataAtual, dataAniversario.withYear(dataAtual.getYear()));
+            periodo = Period.between(dataAtual, dataAniversario.withYear(dataAtual.getYear()));
             dias = periodo.getDays();
             meses = periodo.getMonths();
         }
