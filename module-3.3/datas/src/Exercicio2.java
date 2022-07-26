@@ -11,6 +11,7 @@ public class Exercicio2 {
         int dias;
         int meses;
         int anos;
+        Period periodo;
 
         System.out.println("Informe a primeira data (YYYY-MM-DD): ");
         LocalDate data1 = LocalDate.parse(sc.nextLine());
@@ -18,12 +19,12 @@ public class Exercicio2 {
         LocalDate data2 = LocalDate.parse(sc.nextLine());
 
         if (data1.isBefore(data2)) {
-            Period periodo = Period.between(data1, data2);
+            periodo = Period.between(data1, data2);
             dias = periodo.getDays();
             meses = periodo.getMonths();
             anos = periodo.getYears();
         } else {
-            Period periodo = Period.between(data2, data1);
+            periodo = Period.between(data2, data1);
             dias = periodo.getDays();
             meses = periodo.getMonths();
             anos = periodo.getYears();
