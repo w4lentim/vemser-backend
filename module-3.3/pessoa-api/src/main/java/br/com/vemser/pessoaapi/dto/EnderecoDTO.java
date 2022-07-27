@@ -15,6 +15,9 @@ public class EnderecoDTO extends EnderecoCreateDTO {
     @Schema(description = "Identificador (ID) do endereço.")
     private Integer idEndereco;
 
+    @Schema(description = "Identificador da pessoa.")
+    private Integer idPessoa;
+
     @Schema(description = "Pessoas que estão associadas a este endereço")
-    private List<PessoaDTO> pessoaDTO;
+    private PessoaDTO pessoaDTO;
 }

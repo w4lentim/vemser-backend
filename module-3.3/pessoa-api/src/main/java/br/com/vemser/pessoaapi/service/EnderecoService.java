@@ -65,17 +65,21 @@ public class EnderecoService {
         return enderecoDTO;
     }
 
-    public EnderecoDTO update(Integer idEndereco, EnderecoCreateDTO enderecoAtualizar) throws RegraDeNegocioException {
+    public EnderecoDTO update(Integer idEndereco, EnderecoDTO enderecoAtualizar) throws RegraDeNegocioException {
         log.info("Atualizando endereço...");
+
+        PessoaEntity pessoaEntity = pessoaService.findByIdPessoa(enderecoAtualizar.getIdPessoa());
 
         EnderecoEntity enderecoRecuperado = enderecoRepository.findById(idEndereco)
                 .orElseThrow(() -> new RegraDeNegocioException("Endereço não encontrado."));
 
         EnderecoEntity enderecoEntity = convertToEntity(enderecoAtualizar);
         enderecoEntity.setIdEndereco(idEndereco);
-        enderecoEntity.setPessoaEntitySet(enderecoRecuperado.getPessoaEntitySet());
+        enderecoEntity.setPessoaEntitySet(Set.of(pessoaEntity));
 
         EnderecoDTO enderecoDTO = convertToDTO(enderecoRepository.save(enderecoEntity));
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
+        enderecoDTO.setPessoaDTO(pessoaDTO);
 
         log.info("Endereço atualizado com sucesso!");
         return enderecoDTO;
