@@ -1,6 +1,7 @@
-package br.com.vemser.pessoaapi.service;
+package br.com.vemser.pessoaapi.security;
 
 import br.com.vemser.pessoaapi.entity.UsuarioEntity;
+import br.com.vemser.pessoaapi.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +19,6 @@ public class AuthenticationService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UsuarioEntity> usuarioOptional = usuarioService.findByLogin(username);
-
         return usuarioOptional
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário inválido!"));
     }

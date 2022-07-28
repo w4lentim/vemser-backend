@@ -1,12 +1,16 @@
 package br.com.vemser.pessoaapi.controller;
 
+import br.com.vemser.pessoaapi.config.Response;
 import br.com.vemser.pessoaapi.dto.LoginDTO;
+import br.com.vemser.pessoaapi.dto.UsuarioDTO;
 import br.com.vemser.pessoaapi.entity.UsuarioEntity;
 import br.com.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.security.TokenService;
 import br.com.vemser.pessoaapi.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,7 +32,6 @@ public class AuthController {
 
     private final UsuarioService usuarioService;
     private final TokenService tokenService;
-
     private final AuthenticationManager authenticationManager;
 
     @PostMapping
@@ -48,5 +51,11 @@ public class AuthController {
 
         String token = tokenService.getToken(usuarioEntity);
         return token;
+    }
+
+    @Response
+    @PostMapping("/cadastrar-usuario")
+    public ResponseEntity<UsuarioDTO> cadastrarNovoUsuario(@RequestBody @Valid LoginDTO loginDTO) throws RegraDeNegocioException {
+        return new ResponseEntity<>(usuarioService.cadastrarNovoUsuario(loginDTO), HttpStatus.ACCEPTED);
     }
 }

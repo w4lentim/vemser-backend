@@ -14,8 +14,10 @@ import javax.validation.constraints.NotBlank;
 public class LoginDTO {
 
     @NotBlank
+    @Schema(example = "user")
     private String login;
 
     @NotBlank
+    @Schema(example = "123")
     private String senha;
 }

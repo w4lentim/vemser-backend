@@ -23,8 +23,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TokenService {
 
-    private final UsuarioService usuarioService;
-
     @Value("${jwt.secret}")
     private String secret;
 
