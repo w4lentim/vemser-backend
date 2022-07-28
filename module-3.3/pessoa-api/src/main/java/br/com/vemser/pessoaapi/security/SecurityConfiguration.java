@@ -28,7 +28,7 @@ public class SecurityConfiguration {
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests((auth) ->
-                        auth.antMatchers("/", "/auth").permitAll()
+                        auth.antMatchers("/", "/auth", "/auth/cadastrar-usuario").permitAll()
                                 .anyRequest().authenticated()
                 );
 
