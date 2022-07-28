@@ -7,11 +7,9 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class ContatoCreateDTO {
 
     @Schema(description = "Identificador (ID) da pessoa que o contato está associado.")

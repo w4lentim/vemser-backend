@@ -5,11 +5,9 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class PessoaDTO extends PessoaCreateDTO {
 
     @Schema(description = "Identificador (ID) da pessoa.")

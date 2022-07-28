@@ -2,8 +2,7 @@ package br.com.vemser.pessoaapi.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class RelatorioPersonalizadoDTO {

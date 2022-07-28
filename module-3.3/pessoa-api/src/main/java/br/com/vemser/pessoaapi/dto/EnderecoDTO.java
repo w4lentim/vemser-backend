@@ -5,11 +5,9 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class EnderecoDTO extends EnderecoCreateDTO {
 
     @Schema(description = "Identificador (ID) do endereço.")

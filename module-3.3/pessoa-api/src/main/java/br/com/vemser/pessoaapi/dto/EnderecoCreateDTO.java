@@ -8,11 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class EnderecoCreateDTO {
 
     @NotNull(message = "O tipo de endereço deve ser RESIDENCIAL/COMERCIAL.")
