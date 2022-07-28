@@ -66,7 +66,7 @@ public class EnderecoController {
     @Operation(summary = "Atualizar endereço", description = "Atualizará todos os dados de um endereço de acordo com ID informado")
     @Response
     @PutMapping("/{idEndereco}")
-    public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") Integer idEndereco, @RequestBody @Valid EnderecoCreateDTO enderecoAtualizar) throws RegraDeNegocioException {
+    public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") Integer idEndereco, @RequestBody @Valid EnderecoDTO enderecoAtualizar) throws RegraDeNegocioException {
         return new ResponseEntity<>(enderecoService.update(idEndereco, enderecoAtualizar), HttpStatus.ACCEPTED);
     }
 

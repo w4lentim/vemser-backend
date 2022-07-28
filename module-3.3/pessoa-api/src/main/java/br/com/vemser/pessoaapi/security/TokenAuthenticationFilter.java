@@ -19,29 +19,20 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
 
-    private static final String BEARER = "Bearer ";
+    protected static final String BEARER = "Bearer ";
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String token = getTokenFromHeader(request);
-        Optional<UsuarioEntity> optionalUsuarioEntity = tokenService.isValid(token);
 
-        authenticate(optionalUsuarioEntity);
+        UsernamePasswordAuthenticationToken dtoDoSprintSecurity = tokenService.isValid(token);
+
+        SecurityContextHolder.getContext().setAuthentication(dtoDoSprintSecurity);
 
         filterChain.doFilter(request, response);
-    }
-
-    public void authenticate(Optional<UsuarioEntity> usuarioEntityOptional) {
-        if(!usuarioEntityOptional.isEmpty()){
-            UsuarioEntity usuarioEntity = usuarioEntityOptional.get();
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                    new UsernamePasswordAuthenticationToken(usuarioEntity.getLogin(), null, Collections.emptyList());
-            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-        } else {
-            SecurityContextHolder.getContext().setAuthentication(null);
-        }
     }
 
     private String getTokenFromHeader(HttpServletRequest request){
